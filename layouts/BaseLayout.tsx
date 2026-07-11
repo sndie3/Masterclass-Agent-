@@ -6,7 +6,7 @@ export default function BaseLayout() {
   //const isAuthPage =  location.pathname === '/';
 
   return (
-    <section className="min-h-dvh flex w-full">
+    <section className="min-h-dvh flex w-full bg-black">
       <main className="flex flex-1 flex-col overflow-y-auto">
         {/* Page Content */}
         <Outlet />
