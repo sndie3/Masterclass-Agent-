@@ -23,7 +23,7 @@ function Support() {
     }, []);
 
     return (
-        <div className="relative min-h-screen overflow-hidden text-white flex flex-col font-bahnschrift">
+        <div className="relative min-h-screen overflow-hidden text-white flex flex-col font-bahnschrift bg-black">
             <div className="rounded-t-[32px] px-3 pt-6 pb-2 relative z-30" style={{ backgroundColor: 'var(--background-color)' }}>
                 <div className="flex items-center mb-5 justify-between">
                     <button

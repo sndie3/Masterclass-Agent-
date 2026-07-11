@@ -100,7 +100,7 @@ export default function Change() {
             <button
               onClick={handleReset}
               className="w-full py-3 font-semibold text-white transition hover:opacity-90"
-              style={{ backgroundColor: "var(--card-color)" }}
+              style={{ backgroundColor: "var(--button-color)" }}
             >
               Submit
             </button>
@@ -123,7 +123,7 @@ export default function Change() {
             <button
               onClick={handleSubmit}
               className="w-full py-3 font-semibold text-white transition hover:opacity-90"
-              style={{ backgroundColor: "var(--card-color)" }}
+              style={{ backgroundColor: "var(--button-color)" }}
             >
               Submit
             </button>

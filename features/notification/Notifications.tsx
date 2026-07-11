@@ -62,7 +62,10 @@ export default function Notifications() {
     key: keyof NotificationSettings,
     label: string
   ) => (
-    <div className="flex items-center justify-between py-4 border-b border-white/10">
+    <div
+      className="flex items-center justify-between rounded-lg px-4 py-4"
+      style={{ backgroundColor: "var(--card-color)" }}
+    >
       <span className="text-sm font-medium">{label}</span>
       <Toggle
         checked={settings[section][key]}
@@ -77,7 +80,7 @@ export default function Notifications() {
   ) => (
     <div className="mb-6">
       <h3 className="text-lg font-bold mb-1">{title}</h3>
-      <div className="px-1">
+      <div className="flex flex-col gap-2">
         {renderRow(section, "email", "Email")}
         {renderRow(section, "sms", "SMS")}
         {renderRow(section, "notification", "Notification")}

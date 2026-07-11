@@ -1,14 +1,12 @@
-const CACHE_NAME = "masterclass-v3";
-const STATIC_CACHE = "masterclass-static-v3";
+const CACHE_NAME = "masterclass-v4";
+const STATIC_CACHE = "masterclass-static-v4";
 
 const PRECACHE_URLS = [
   "/",
   "/index.html",
   "/manifest.json",
-  "/masterclass-logo.png",
-  "/icon-192.png",
-  "/icon-512.png",
   "/apple-touch-icon.png",
+  "/favicon.svg",
 ];
 
 self.addEventListener("install", (event) => {
@@ -49,7 +47,9 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put("/index.html", cacheClone));
           return response;
         })
-        .catch(() => caches.match("/index.html") || caches.match("/"))
+        .catch(() =>
+        caches.match("/index.html").then((res) => res || caches.match("/"))
+      )
     );
     return;
   }
@@ -70,7 +70,7 @@ self.addEventListener("fetch", (event) => {
           }
           return networkResponse;
         })
-        .catch(() => cached);
+        .catch(() => cached || Response.error());
 
       return cached || fetchPromise;
     })

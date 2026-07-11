@@ -19,33 +19,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Preload the logo shown on the first screen -->
-    <link rel="preload" as="image" href="/masterclass-original.png" type="image/png" />
-
-    <!-- Load the font without blocking the splash screen -->
+    <!-- Load the font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" />
 
-    <!-- Inline splash screen: shown immediately while the PWA loads -->
     <style>
-      html, body, #root { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #0A0A0A; }
-      #splash {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #0A0A0A;
-        transition: opacity 0.3s ease;
-      }
-      #splash img { width: 140px; height: auto; object-fit: contain; }
-      #splash.hidden { opacity: 0; pointer-events: none; }
+      html, body { margin: 0; padding: 0; width: 100%; height: 100%; background-color: #0A0A0A; }
+      #root { margin: 0; padding: 0; width: 100%; min-height: 100%; background-color: transparent; }
     </style>
   </head>
   <body>
-    <div id="splash">
-      <img src="/masterclass-logo.png" alt="MASTERCLASS" />
-    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

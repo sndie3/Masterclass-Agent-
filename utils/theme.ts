@@ -51,18 +51,20 @@ export function applyTheme(theme: Theme) {
     // Other themes use background images
     const imageUrl = themeImages[theme];
     body.style.backgroundImage = `url("${imageUrl}")`;
+    body.style.backgroundColor = 'transparent';
     body.style.backgroundSize = 'cover';
     body.style.backgroundPosition = 'center';
     body.style.backgroundRepeat = 'no-repeat';
     body.style.backgroundAttachment = 'fixed';
 
-    // Set CSS variables for component colors (light translucent overlays so the theme image shows through)
+    // Set CSS variables: page background stays translucent to show the image,
+    // but cards, buttons, and inputs are solid dark so content remains readable.
     root.style.setProperty('--primary-color', '#0054A6');
     root.style.setProperty('--secondary-color', '#FFD700');
-    root.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.65)');
-    root.style.setProperty('--card-color', 'rgba(18, 18, 18, 0.65)');
-    root.style.setProperty('--button-color', 'rgba(26, 26, 26, 0.65)');
+    root.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.35)');
+    root.style.setProperty('--card-color', '#121212');
+    root.style.setProperty('--button-color', '#1A1A1A');
     root.style.setProperty('--hover-color', 'rgba(255, 255, 255, 0.12)');
-    root.style.setProperty('--input-color', 'rgba(42, 42, 42, 0.5)');
+    root.style.setProperty('--input-color', '#2a2a2a');
   }
 }

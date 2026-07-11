@@ -17,16 +17,23 @@ export interface InstallResult {
 }
 
 let globalDeferredPrompt: BeforeInstallPromptEvent | null = null;
+const INSTALL_PROMPT_UPDATED_EVENT = "install-prompt-updated";
+
+function notifyInstallPromptUpdated() {
+  window.dispatchEvent(new CustomEvent(INSTALL_PROMPT_UPDATED_EVENT));
+}
 
 if (typeof window !== "undefined") {
   const handleBeforeInstallPrompt = (event: Event) => {
     event.preventDefault();
     globalDeferredPrompt = event as BeforeInstallPromptEvent;
+    notifyInstallPromptUpdated();
     window.dispatchEvent(new CustomEvent("install-prompt-available"));
   };
 
   const handleAppInstalled = () => {
     globalDeferredPrompt = null;
+    notifyInstallPromptUpdated();
     window.dispatchEvent(new CustomEvent("app-installed"));
   };
 
@@ -75,6 +82,10 @@ export function useInstallPrompt() {
       }
     };
 
+    const handleInstallPromptUpdated = () => {
+      setDeferredPrompt(globalDeferredPrompt);
+    };
+
     if (globalDeferredPrompt) {
       setDeferredPrompt(globalDeferredPrompt);
     }
@@ -82,11 +93,13 @@ export function useInstallPrompt() {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
     window.addEventListener("install-prompt-available", handleInstallPromptAvailable);
+    window.addEventListener(INSTALL_PROMPT_UPDATED_EVENT, handleInstallPromptUpdated);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
       window.removeEventListener("appinstalled", handleAppInstalled);
       window.removeEventListener("install-prompt-available", handleInstallPromptAvailable);
+      window.removeEventListener(INSTALL_PROMPT_UPDATED_EVENT, handleInstallPromptUpdated);
     };
   }, []);
 
@@ -113,6 +126,7 @@ export function useInstallPrompt() {
         const { outcome } = await prompt.userChoice;
         setDeferredPrompt(null);
         globalDeferredPrompt = null;
+        notifyInstallPromptUpdated();
         setIsInstalling(false);
         if (outcome === "accepted") {
           setIsInstalled(true);
