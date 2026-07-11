@@ -1,23 +1,12 @@
 import { ArrowLeft, SendHorizonal } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react";
-import GameCard from "./components/GameCard";
 
 function Support() {
-    const games = [
-        { imageSrc: "/assets/Hari-tari.png", title: "Hari Tari" },
-        { imageSrc: "/assets/regnum.png", title: "Slots" },
-        { imageSrc: "/assets/Hari-tari.png", title: "Baccarat" },
-        { imageSrc: "/assets/regnum.png", title: "Poker" },
-        { imageSrc: "/assets/Hari-tari.png", title: "Hari Tari" },
-        { imageSrc: "/assets/regnum.png", title: "Slots" },
-        { imageSrc: "/assets/Hari-tari.png", title: "Baccarat" },
-        { imageSrc: "/assets/regnum.png", title: "Poker" },
-    ];
 
     const route = useNavigate()
     const [activeTab, setActiveTab] = useState("affiliates");
-    const [selectedGame, setSelectedGame] = useState<{
+    const [selectedGame] = useState<{
         imageSrc: string;
         title: string;
     } | null>(null);
@@ -26,7 +15,7 @@ function Support() {
         { id: "players", label: "PLAYERS" },
     ];
     const [message, setMessage] = useState("");
-    const [showGame, setShowGame] = useState(false);
+    const [showGame] = useState(false);
     const [chatWallpaper, setChatWallpaper] = useState("");
 
     useEffect(() => {
