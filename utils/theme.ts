@@ -50,9 +50,9 @@ export function applyTheme(theme: Theme) {
     // Set CSS variables for component colors (light translucent overlays so the theme image shows through)
     root.style.setProperty('--primary-color', '#0054A6');
     root.style.setProperty('--secondary-color', '#FFD700');
-    root.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.35)');
-    root.style.setProperty('--card-color', 'rgba(18, 18, 18, 0.45)');
-    root.style.setProperty('--button-color', 'rgba(26, 26, 26, 0.55)');
+    root.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.65)');
+    root.style.setProperty('--card-color', 'rgba(18, 18, 18, 0.65)');
+    root.style.setProperty('--button-color', 'rgba(26, 26, 26, 0.65)');
     root.style.setProperty('--hover-color', 'rgba(255, 255, 255, 0.12)');
     root.style.setProperty('--input-color', 'rgba(42, 42, 42, 0.5)');
   }
