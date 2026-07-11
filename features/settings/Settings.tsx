@@ -3,7 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
 
 const settingsOptions = [
-  { label: "PROFILE SECURITY", route: "/profile" },
+  { label: "PROFILE SECURITY", route: "/profile-security" },
   { label: "CHAT SETTINGS", route: "/chat-settings" },
   { label: "DEACTIVATE ACCOUNT", route: "/deactivate-account" },
   { label: "LICENSES", route: "/licenses" },
