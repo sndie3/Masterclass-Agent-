@@ -2,8 +2,7 @@ const CACHE_NAME = "masterclass-v1";
 const ASSETS_TO_CACHE = [
   "/",
   "/index.html",
-  "/manifest.json",
-  "/favicon.svg",
+  "/src/main.tsx",
   "/masterclass-logo.png",
   "/APP ICON MASTERCLASS.ico"
 ];
