@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Camera } from "lucide-react";
+import { ChevronLeft, Camera } from "lucide-react";
 import Footer from "../../components/common/Footer";
 
 interface SubAccount {
@@ -208,10 +208,10 @@ export default function AddLevel() {
           {/* Take Picture */}
           <button
             onClick={handleOpenCamera}
-            className="w-full py-8 border border-white/30 flex flex-col items-center justify-center gap-2 text-gray-400 hover:text-white transition relative overflow-hidden"
+            className="w-full aspect-video border border-white/30 flex flex-col items-center justify-center gap-2 text-gray-400 hover:text-white transition relative overflow-hidden"
           >
             {photo ? (
-              <img src={photo} alt="Captured" className="absolute inset-0 w-full h-full object-cover" />
+              <img src={photo} alt="Captured" className="w-full h-full object-contain" />
             ) : (
               <>
                 <Camera size={28} />
@@ -251,13 +251,12 @@ export default function AddLevel() {
 
           {/* Level + Activate */}
           <div className="flex items-center gap-3 mt-2">
-            <div className="flex-1 flex items-stretch border border-white">
+            <div className="w-32 flex items-stretch border border-white">
               <div className="px-3 py-3 border-r border-white flex items-center">
                 <span className="text-sm font-semibold">Level</span>
               </div>
-              <div className="flex-1 flex items-center justify-between px-3 py-3">
+              <div className="flex-1 flex items-center justify-center px-3 py-3">
                 <span className="text-sm font-bold">{canCreate ? childLevel : "-"}</span>
-                {canCreate && <ChevronRight size={16} />}
               </div>
             </div>
 
