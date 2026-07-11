@@ -5,9 +5,9 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const menuItems = [
-    { label: "Link player account" },
-    { label: "Selfie with ID" },
-    { label: "Share Referral Code" },
+    { label: "Link player account" , link : ""},
+    { label: "Selfie with ID" , link : ""},
+    { label: "Share Referral Code", link : "/profile/share-referral" },
   ];
 
   return (
@@ -15,7 +15,7 @@ export default function Profile() {
       {/* Header */}
       <div className="flex items-center mb-6">
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/dashboard')}
           className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
           style={{ backgroundColor: "var(--button-color)" }}
         >
@@ -29,8 +29,7 @@ export default function Profile() {
       {/* User Info */}
       <div className="mb-8">
         <h2 className="text-xl font-bold tracking-wide">
-          Roger Dela Cruz{" "}
-          <span className="border-b-2 border-red-600">Nicon</span>
+          Roger Dela Cruz Nicon
         </h2>
         <p className="text-gray-500 text-sm mt-1">
           Lv2-ROGER-000053-2026
@@ -42,6 +41,7 @@ export default function Profile() {
         {menuItems.map((item) => (
           <button
             key={item.label}
+            onClick={() => navigate(item.link)}
             className="w-full py-4 rounded-lg text-sm font-semibold text-center transition"
             style={{
               backgroundColor: "var(--card-color)",

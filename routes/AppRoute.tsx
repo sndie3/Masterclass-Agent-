@@ -11,6 +11,8 @@ import Promo from "../features/promo/Promo"
 import AddLevel from "../features/addLevel/AddLevel"
 import Register from "../features/register/Register"
 import Settings from "../features/settings/Settings"
+import ShareReferral from "../features/profile/ShareRefferal"
+
 export default function AppRoutes() {
 
   return (
@@ -20,6 +22,7 @@ export default function AppRoutes() {
         <Route index element={<Login />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="profile/share-referral" element={<ShareReferral />} />
         <Route path="theme" element={<Theme />} />
         <Route path="notifications" element={<Notifications />} />
         <Route path="support" element={<Support />} />

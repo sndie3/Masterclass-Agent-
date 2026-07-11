@@ -150,11 +150,11 @@ function Home() {
           </div>
           <div className='flex flex-col justify-center'>
             <p className='text-sm'>Online</p>
-            <p className='py-5 text-2xl text-white'> {(1000).toLocaleString()}</p>
+            <p className='py-2 text-2xl text-white'> {(1000).toLocaleString()}</p>
           </div>
           <div className='flex flex-col justify-center'>
             <p className='text-sm'>Offline</p>
-            <p className='py-5 text-2xl text-white'> {(5000).toLocaleString()}</p>
+            <p className='py-2 text-2xl text-white'> {(5000).toLocaleString()}</p>
           </div>
         </div>
         <p className='py-5 text-gray-400 '>Wallet: </p>
@@ -200,11 +200,11 @@ function Home() {
           />
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="flex h-8 w-8 items-center justify-center rounded-full hover:opacity-80"
+            className="flex h-9 w-9 items-center justify-center rounded-full hover:opacity-80"
             style={{ backgroundColor: 'var(--button-color)' }}
           >
             <div
-              className={`h-6 w-6 rounded-full ${collapsed ? "bg-blue-400" : "bg-gray-300"
+              className={`h-7 w-7 rounded-full ${collapsed ? "bg-blue-400" : "bg-gray-300"
                 }`}
             />
           </button>
