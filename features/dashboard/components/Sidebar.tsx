@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../../components/common/Footer";
 import { useInstallPrompt } from '../../../hooks/useInstallPrompt'
+import { useModal } from '../../../context/ModalContext';
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -30,7 +31,8 @@ export default function Sidebar({
     verificationStatus,
 }: SidebarProps) {
     const navigate = useNavigate();
-    const { isInstallable, promptInstall } = useInstallPrompt();
+    const { showModal } = useModal();
+    const { isInstallable, isInstalled, promptInstall } = useInstallPrompt();
 
     const handleMenuClick = (title: string) => {
         if (title === 'Profile') {
@@ -52,7 +54,19 @@ export default function Sidebar({
     };
 
     const handleInstallClick = async () => {
-        await promptInstall();
+        if (isInstallable) {
+            await promptInstall();
+            return;
+        }
+
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as unknown as { MSStream?: boolean }).MSStream;
+        showModal(
+            "info",
+            "Install MASTERCLASS",
+            isIOS
+                ? "Tap the Share button in Safari, then select 'Add to Home Screen' to install this app."
+                : "Open your browser menu and select 'Add to Home Screen' or 'Install App' to install this app."
+        );
     };
 
     const handleLogout = () => {
@@ -138,7 +152,7 @@ export default function Sidebar({
                         ))}
                     </div>
 
-                        {isInstallable && (
+                        {!isInstalled && (
                             <button
                                 onClick={handleInstallClick}
                                 className="w-full px-6 py-4 text-[20px] font-semibold flex items-center hover:bg-[var(--hover-color)] transition gap-2"
