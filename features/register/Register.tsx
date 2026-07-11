@@ -178,8 +178,8 @@ export default function Register() {
             <input
               type="text"
               inputMode="numeric"
-              placeholder="YY"
-              maxLength={2}
+              placeholder="YYYY"
+              maxLength={4}
               value={form.birthYear}
               onChange={(e) => handleChange("birthYear", e.target.value.replace(/\D/g, ""))}
               className="w-0 flex-1 min-w-0 py-3 px-1 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
