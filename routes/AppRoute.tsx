@@ -15,6 +15,7 @@ import Settings from "../features/settings/Settings"
 import ChatSettings from "../features/settings/ChatSettings"
 import DeactivateAccount from "../features/settings/DeactivateAccount"
 import ShareReferral from "../features/profile/ShareRefferal"
+import Change from "../features/changepass/Change"
 
 export default function AppRoutes() {
 
@@ -38,6 +39,7 @@ export default function AppRoutes() {
         <Route path="settings" element={<Settings />}/>
         <Route path="chat-settings" element={<ChatSettings />}/>
         <Route path="deactivate-account" element={<DeactivateAccount />}/>
+        <Route path="change-password" element={<Change />}/>
       </Route>
 
       {/* Protected Routes */}

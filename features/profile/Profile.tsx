@@ -102,6 +102,7 @@ export default function Profile() {
           onMouseLeave={(e) =>
             (e.currentTarget.style.backgroundColor = "var(--card-color)")
           }
+          onClick={() => navigate("/change-password")}
         >
           Change Password
         </button>
