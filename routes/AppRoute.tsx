@@ -12,6 +12,7 @@ import AddLevel from "../features/addLevel/AddLevel"
 import Register from "../features/register/Register"
 import Settings from "../features/settings/Settings"
 import ChatSettings from "../features/settings/ChatSettings"
+import DeactivateAccount from "../features/settings/DeactivateAccount"
 import ShareReferral from "../features/profile/ShareRefferal"
 
 export default function AppRoutes() {
@@ -34,6 +35,7 @@ export default function AppRoutes() {
         <Route path="register" element={<Register />}/>
         <Route path="settings" element={<Settings />}/>
         <Route path="chat-settings" element={<ChatSettings />}/>
+        <Route path="deactivate-account" element={<DeactivateAccount />}/>
       </Route>
 
       {/* Protected Routes */}
