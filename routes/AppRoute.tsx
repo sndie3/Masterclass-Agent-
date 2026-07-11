@@ -4,6 +4,7 @@ import Login from "../features/auth/Login"
 import Home from "../features/dashboard/Home";
 import Profile from "../features/profile/Profile";
 import Support from "../features/support/Support"
+import Theme from "../features/theme/Theme"
 export default function AppRoutes() {
 
   return (
@@ -13,6 +14,7 @@ export default function AppRoutes() {
         <Route index element={<Login />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="profile" element={<Profile />} />
+        <Route path="theme" element={<Theme />} />
         <Route path="support" element={<Support />} />
       </Route>
 

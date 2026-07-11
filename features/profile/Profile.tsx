@@ -12,17 +12,6 @@ export default function Profile() {
 
   return (
     <div className="min-h-dvh flex flex-col text-white px-5 py-4 relative overflow-hidden">
-      {/* Starry dark background */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          backgroundColor: "#000",
-          backgroundImage:
-            "radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)",
-          backgroundSize: "3px 3px",
-        }}
-      />
-
       {/* Header */}
       <div className="flex items-center mb-6">
         <button

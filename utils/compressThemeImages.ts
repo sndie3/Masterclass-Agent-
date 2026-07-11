@@ -6,9 +6,9 @@ import { compressImageFile, formatSize, listImageFiles } from './compressImage.t
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const THEMES_DIR = path.join(__dirname, '..', 'public', 'assets', 'themes');
-const WIDTH = 800;
-const HEIGHT = 800;
+const THEMES_DIR = path.join(__dirname, '..', 'public', 'assets', 'masterclass theme');
+const WIDTH = 1080;
+const HEIGHT = 1920;
 const QUALITY = 75;
 
 async function main() {

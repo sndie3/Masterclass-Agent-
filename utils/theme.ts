@@ -1,23 +1,24 @@
-export type Theme = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10' | '11' | '12' | '13' | '14' | '15' | '16' | '17';
+export type Theme =
+  | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10'
+  | '11' | '12' | '13' | '14' | '15' | '16';
 
 export const themeImages: Record<Theme, string> = {
   '1': '',
-  '2': '/assets/themes/2.jpg',
-  '3': '/assets/themes/3.jpg',
-  '4': '/assets/themes/4.jpg',
-  '5': '/assets/themes/5.jpg',
-  '6': '/assets/themes/6.jpg',
-  '7': '/assets/themes/7.jpg',
-  '8': '/assets/themes/8.jpg',
-  '9': '/assets/themes/9.jpg',
-  '10': '/assets/themes/10.jpg',
-  '11': '/assets/themes/11.jpg',
-  '12': '/assets/themes/12.jpg',
-  '13': '/assets/themes/13.jpg',
-  '14': '/assets/themes/14.jpg',
-  '15': '/assets/themes/15.jpg',
-  '16': '/assets/themes/16.jpg',
-  '17': '/assets/themes/17.jpg',
+  '2': '/assets/masterclass theme/1.jpg',
+  '3': '/assets/masterclass theme/2.jpg',
+  '4': '/assets/masterclass theme/3.jpg',
+  '5': '/assets/masterclass theme/4.jpg',
+  '6': '/assets/masterclass theme/5.jpg',
+  '7': '/assets/masterclass theme/6.jpg',
+  '8': '/assets/masterclass theme/7.jpg',
+  '9': '/assets/masterclass theme/8.jpg',
+  '10': '/assets/masterclass theme/9.jpg',
+  '11': '/assets/masterclass theme/10.jpg',
+  '12': '/assets/masterclass theme/11.jpg',
+  '13': '/assets/masterclass theme/12.jpg',
+  '14': '/assets/masterclass theme/13.jpg',
+  '15': '/assets/masterclass theme/14.jpg',
+  '16': '/assets/masterclass theme/15.jpg',
 };
 
 export function applyTheme(theme: Theme) {
@@ -40,7 +41,7 @@ export function applyTheme(theme: Theme) {
   } else {
     // Other themes use background images
     const imageUrl = themeImages[theme];
-    body.style.backgroundImage = `url(${imageUrl})`;
+    body.style.backgroundImage = `url("${imageUrl}")`;
     body.style.backgroundSize = 'cover';
     body.style.backgroundPosition = 'center';
     body.style.backgroundRepeat = 'no-repeat';
