@@ -1,92 +1,89 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { useModal } from "../../../context/ModalContext";
 
 function LoginCard() {
     const [agree, setAgree] = useState(false);
     const navigate = useNavigate();
-  const [username, setUsername] = useState(() => localStorage.getItem("cachedMobileNumber") || "");
-  const [password, setPassword] = useState("");
+    const [username, setUsername] = useState(() => localStorage.getItem("cachedUsername") || "");
+    const [password, setPassword] = useState("");
 
-  //const { showModal } = useModal();
+    const { showModal } = useModal();
 
-  // Cache mobile number on change
-  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setUsername(value);
-    localStorage.setItem("cachedMobileNumber", value);
-  };
+    // Cache mobile number on change
+    const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setUsername(value);
+        localStorage.setItem("cachedUsername", value);
+    };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
+    };
 
-  const handleLogin = () => {
-    // Validate fields
-    if (!username || !password) {
-      let message;
-      let title;
+    const handleLogin = () => {
+        // Validate fields
+        if (!username || !password) {
+            let message;
+            let title;
 
-      if (!username && !password) {
-        message = "Please enter your username and password.";
-        title = "Missing Required Fields";
-      } else if (!username) {
-        message = "Please enter your username.";
-        title = "Missing Username";
-      } else {
-        message = "Please enter your password.";
-        title = "Missing Password";
-      }
+            if (!username && !password) {
+                message = "Please enter your username and password.";
+                title = "Missing Required Fields";
+            } else if (!username) {
+                message = "Please enter your username.";
+                title = "Missing Username";
+            } else {
+                message = "Please enter your password.";
+                title = "Missing Password";
+            }
 
-    //   showModal(
-    //     "warning",
-    //     title,
-    //     message
-    //   );
+            showModal(
+                "warning",
+                title,
+                message
+            );
 
-      return;
-    }
+            return;
+        }
 
-    if (!agree) {
-    //   showModal(
-    //     "warning",
-    //     "Agreement Required",
-    //     "Please agree to Privacy Policy & Terms of Use"
-    //   );
+        if (!agree) {
+            showModal(
+                "warning",
+                "Agreement Required",
+                "Please agree to Privacy Policy & Terms of Use"
+            );
 
-      return;
-    }
+            return;
+        }
 
-    // Validate against registered mobile number
-    const registeredMobileNumber = localStorage.getItem('registeredMobileNumber');
-    if (registeredMobileNumber && username !== registeredMobileNumber) {
-      alert('Mobile number does not match registered account');
-      return;
-    }
+        // Validate against registered mobile number
+        const registeredUsername = localStorage.getItem('registeredUsername');
+        if (registeredUsername && username !== registeredUsername) {
+            alert('Username does not match registered account');
+            return;
+        }
 
-    // Here you would typically authenticate with your backend
-    console.log('Login attempt:', { username });
-    
-    // Store user mobile number to establish session
-    localStorage.setItem('userMobileNumber', username);
-    
-    // Store registered mobile number if not present (simulating successful login for new device)
-    if (!registeredMobileNumber) {
-      localStorage.setItem('registeredMobileNumber', username);
-    }
-    
-    // Set a generic username if not registered
-    if (!localStorage.getItem('username')) {
-      localStorage.setItem('username', 'Player');
-    }
+        // Here you would typically authenticate with your backend
+        console.log('Login attempt:', { username });
 
-    // Set default verification status if not already set
-    if (!localStorage.getItem('verificationStatus')) {
-      localStorage.setItem('verificationStatus', 'fully-verified');
-    }
-    
-    // Navigate to dashboard
-    navigate('/dashboard');
-  };
+        // Store user mobile number to establish session
+        localStorage.setItem('userUsername', username);
+
+        // Store registered mobile number if not present (simulating successful login for new device)
+        if (!registeredUsername) {
+            localStorage.setItem('registeredUsername', username);
+        }
+
+        // Set a generic username if not registered
+        if (!localStorage.getItem('username')) {
+            localStorage.setItem('username', 'Player');
+        }
+
+        // Set default verification status if not already set
+        // Navigate to dashboard
+        navigate('/dashboard');
+    };
     return (
 
         <div className="min-h-[90dvh] text-white font-sans">
