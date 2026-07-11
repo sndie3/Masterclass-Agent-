@@ -40,8 +40,8 @@ const Toggle = ({
 export default function Notifications() {
   const navigate = useNavigate();
   const [settings, setSettings] = useState<SectionSettings>({
-    promo: { email: true, sms: false, notification: true },
-    support: { email: true, sms: false, notification: true },
+    promo: { email: true, sms: true, notification: true },
+    support: { email: true, sms: true, notification: true },
   });
 
   const toggle = (
