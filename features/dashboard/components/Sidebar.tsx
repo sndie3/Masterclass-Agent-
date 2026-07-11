@@ -34,6 +34,12 @@ export default function Sidebar({
         if (title === 'Profile') {
             navigate('/profile');
             setSidebarOpen(false);
+        } else if (title === 'Notification') {
+            navigate('/notifications');
+            setSidebarOpen(false);
+        } else if (title === 'Privacy') {
+            navigate('');
+            setSidebarOpen(false);
         } else if (title === 'How to Use') {
             navigate('');
             setSidebarOpen(false);

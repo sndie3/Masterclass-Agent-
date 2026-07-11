@@ -5,6 +5,7 @@ import Home from "../features/dashboard/Home";
 import Profile from "../features/profile/Profile";
 import Support from "../features/support/Support"
 import Theme from "../features/theme/Theme"
+import Notifications from "../features/notification/Notifications"
 export default function AppRoutes() {
 
   return (
@@ -15,6 +16,7 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="theme" element={<Theme />} />
+        <Route path="notifications" element={<Notifications />} />
         <Route path="support" element={<Support />} />
       </Route>
 
