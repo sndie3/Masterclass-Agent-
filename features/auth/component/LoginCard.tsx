@@ -155,7 +155,7 @@ function LoginCard() {
                             {agree && "✕"}
                         </div>
 
-                        <span className="text-xs">I agree to MGame's <span className="text-red-600">Privacy Policy</span>   &amp;<span className="text-red-600"> Terms of Use.</span> </span>
+                        <span className="text-xs">I agree to Masterclass <span className="text-red-600">Privacy Policy</span>   &amp;<span className="text-red-600"> Terms of Use.</span> </span>
                     </label>
                     <button
                         onClick={handleLogin}
