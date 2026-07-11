@@ -38,7 +38,7 @@ export default function Button({
   variant = "primary",
   size = "md",
   widthSize= "sm",
-  className = "",
+  className,
   disabled = false,
   ...props
 }: ButtonProps) {
@@ -51,7 +51,6 @@ export default function Button({
         uppercase
         transition
         duration-200
-        w-full
         py-4
         ${widthClasses[widthSize]}
         ${variantClasses[variant]}

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useModal } from "../../../context/ModalContext";
-
+import CustomInput from "../../../components/ui/InputBox"
+import Button from '../../../components/ui/Button';
 function LoginCard() {
     const [agree, setAgree] = useState(true);
     const navigate = useNavigate();
@@ -94,15 +95,10 @@ function LoginCard() {
             <div className="flex min-h-[90dvh] flex-col w-full max-w-[1200px] mx-auto px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-12 lg:px-16">
                 {/* Centered Login Section */}
                 <div className="flex-1 flex flex-col justify-center">
-                    <h1
-                        className="text-center font-bold mb-10"
-                        style={{
-                            fontFamily: "Bahnschrift, sans-serif",
-                            fontSize: "clamp(18px, 3vw, 28px)",
-                        }}
-                    >
-                        MASTERCLASS
-                    </h1>
+
+                    <span className='flex justify-center'>
+                        <img src="/masterclass-logo.png" alt="masterclass-logo" className='w-35 object-contain' />
+                    </span>
                     <div className="pb-6">
                         <p
                             className="text-[#666] leading-relaxed text-justify"
@@ -128,29 +124,19 @@ function LoginCard() {
                         </p>
                     </div>
                     <div className="space-y-2">
-                        <input
-                            type="text"
+                        <CustomInput
+                            type='text'
+                            custom-style='placeholder:italic placeholder:tracking-[8px] py-4'
                             placeholder="Username"
                             onChange={handleUsernameChange}
-                            className="w-full bg-transparent border border-[#333] rounded px-4 py-3 md:py-4 text-center text-white placeholder:italic placeholder:tracking-[8px] outline-none focus:border-white transition-colors"
-                            style={{
-                                fontFamily: '"Calibri Light", Calibri, sans-serif',
-                                fontSize: "clamp(14px, 1.5vw, 18px)",
-                            }}
                         />
-
-                        <input
-                            type="password"
-                            placeholder="Password"
+                        <CustomInput
+                            type='password'
                             onChange={handlePasswordChange}
-                            className="w-full bg-transparent border border-[#333] rounded px-4 py-3 md:py-4 text-center text-white placeholder:italic placeholder:tracking-[8px] outline-none focus:border-white transition-colors"
-                            style={{
-                                fontFamily: '"Calibri Light", Calibri, sans-serif',
-                                fontSize: "clamp(14px, 1.5vw, 18px)",
-                            }}
+                            custom-style='placeholder:italic placeholder:tracking-[8px] py-4'
+                            placeholder="Password"
                         />
                     </div>
-
                     <label className="flex items-center gap-2 mt-3 cursor-pointer">
                         <div
                             onClick={() => setAgree(!agree)}
@@ -161,13 +147,12 @@ function LoginCard() {
 
                         <span className="text-xs">I agree to Masterclass <span className="text-red-600">Privacy Policy</span>   &amp;<span className="text-red-600"> Terms of Use.</span> </span>
                     </label>
-                    <button
+                    <Button 
+                        variant='secondary'
                         onClick={handleLogin}
-                        className="mx-auto mt-6 bg-[#222] hover:bg-[#333] transition-colors cursor-pointer px-16 py-2 text-lg font-bold"
-                    >
-                        LOGIN
-                    </button>
-
+                        className='mx-auto tracking-widest mt-5'>
+                        Login
+                    </Button>
                     <div className="flex justify-center mt-15 text-lg font-bold">
                         <button
                             className="cursor-pointer"
