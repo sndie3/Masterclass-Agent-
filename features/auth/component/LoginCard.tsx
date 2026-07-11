@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useModal } from "../../../context/ModalContext";
 
 function LoginCard() {
-    const [agree, setAgree] = useState(false);
+    const [agree, setAgree] = useState(true);
     const navigate = useNavigate();
     const [username, setUsername] = useState(() => localStorage.getItem("cachedUsername") || "");
     const [password, setPassword] = useState("");

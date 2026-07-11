@@ -20,6 +20,7 @@ export default function AppRoutes() {
       {/* Main Website */}
       <Route path="/" element={<BaseLayout />}>
         <Route index element={<Login />} />
+        <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="profile/share-referral" element={<ShareReferral />} />
