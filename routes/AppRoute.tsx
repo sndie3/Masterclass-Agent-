@@ -6,6 +6,7 @@ import Profile from "../features/profile/Profile";
 import Support from "../features/support/Support"
 import Theme from "../features/theme/Theme"
 import Notifications from "../features/notification/Notifications"
+import Earnings from "../features/earnings/Earnings"
 export default function AppRoutes() {
 
   return (
@@ -18,6 +19,7 @@ export default function AppRoutes() {
         <Route path="theme" element={<Theme />} />
         <Route path="notifications" element={<Notifications />} />
         <Route path="support" element={<Support />} />
+        <Route path="earnings" element={<Earnings/>}/>
       </Route>
 
       {/* Protected Routes */}
