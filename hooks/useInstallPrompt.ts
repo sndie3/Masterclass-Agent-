@@ -25,7 +25,6 @@ function notifyInstallPromptUpdated() {
 
 if (typeof window !== "undefined") {
   const handleBeforeInstallPrompt = (event: Event) => {
-    event.preventDefault();
     globalDeferredPrompt = event as BeforeInstallPromptEvent;
     notifyInstallPromptUpdated();
     window.dispatchEvent(new CustomEvent("install-prompt-available"));
@@ -65,7 +64,6 @@ export function useInstallPrompt() {
     setIsInstalled(checkIsInstalled());
 
     const handleBeforeInstallPrompt = (event: Event) => {
-      event.preventDefault();
       setDeferredPrompt(event as BeforeInstallPromptEvent);
     };
 

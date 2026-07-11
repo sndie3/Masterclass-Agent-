@@ -8,7 +8,7 @@ import AutoInstallPrompt from "../components/common/AutoInstallPrompt"
 // MAIN
 function App() {
   return (
-    <main className="h-dvh ">
+    <main className="h-dvh" style={{ backgroundColor: 'var(--background-color)' }}>
       <ThemeProvider>
         <ModalProvider>
           <AutoInstallPrompt />
