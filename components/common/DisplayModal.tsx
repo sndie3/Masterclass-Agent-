@@ -49,7 +49,7 @@ export default function DisplayModal({
                 className="relative w-[90%] max-w-sm border-[0.5px] border-white bg-[#1d1d1d] p-6 shadow-xl"
             >
                 <img
-                    src="/assets/icons/manoy.png"
+                    src="/assets/images/manoy.png"
                     alt=""
                     className="absolute -top-22 left-1/2 -translate-x-1/2 w-42 h-25"
                 />
