@@ -52,7 +52,7 @@ function Home() {
     {
       icon: "/assets/icons/support.png",
       title: "Support",
-      route: ""
+      route: "/support"
     },
   ];
 
@@ -160,7 +160,7 @@ function Home() {
             <button
               key={item.title}
               onClick={() => navigate(item.route)}
-              className="w-full px-6 py-4 flex items-center hover:bg-[var(--hover-color)] transition gap-2"
+              className="w-full px-6 py-4 flex items-center hover:bg-[var(--hover-c olor)] transition gap-2"
             >
               <div className="flex items-center gap-10 flex-1">
                 <img src={item.icon} alt={item.title}
