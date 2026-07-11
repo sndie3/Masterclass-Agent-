@@ -1,10 +1,42 @@
 import { ArrowLeft } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-
+import LogsTable from "../../components/common/LogsTable";
 function Earnings() {
 
     const route = useNavigate()
-   
+    const logs = [
+        {
+            uid: "PID-ROGER-000053-2026",
+            gc: 101,
+            ens: 0.5,
+        },
+        {
+            uid: "PID-ROGER-000054-2026",
+            gc: 2500,
+            ens: 1.25,
+        },
+        {
+            uid: "PID-ROGER-000055-2026",
+            gc: 10000,
+            ens: 10,
+        },
+        {
+            uid: "PID-ROGER-000055-2026",
+            gc: 10000,
+            ens: 10,
+        },
+        {
+            uid: "PID-ROGER-000055-2026",
+            gc: 10000,
+            ens: 10,
+        },
+        {
+            uid: "PID-ROGER-000055-2026",
+            gc: 10000,
+            ens: 10,
+        },
+
+    ];
     return (
         <div className="relative min-h-screen overflow-hidden text-white flex flex-col ">
             <div className="rounded-t-[32px] px-3 pt-6 pb-2 relative z-30" style={{ backgroundColor: 'var(--background-color)' }}>
@@ -16,20 +48,33 @@ function Earnings() {
                         <ArrowLeft size={20} className="text-white" />
                     </button>
                     <h1 className="text-[24px] font-semibold ">Earnings</h1>
-                    <div>
-                        <img src="/assets/icons/invite.png" alt="icon" className="w-7 h-7" />
-                    </div>
+                    <p/>
                 </div>
             </div>
 
             <div className="flex-1 mt-3 overflow-y-auto px-3">
                 <p className="flex text-justify text-gray-400 text-sm">
-                    Earnings are real-time and cut-off transactions. You can withdraw anytime only to real-time earnings on the next day and cut-off transactions are withdrawable on the 16th and every 1st day of the month. 
+                    Earnings are real-time and cut-off transactions. You can withdraw anytime only to real-time earnings on the next day and cut-off transactions are withdrawable on the 16th and every 1st day of the month.
                 </p>
-                <br/>
+                <br />
                 <p className="text-gray-400 text-sm">PLAY RESPONSIBLY.</p>
-                <br/>
+                <br />
+                <div className="flex justify-evenly">
+                    <div className='flex flex-col'>
+                        <p className='text-sm'>Speciality</p>
+                        <p className=' text-2xl text-white'> {(10022220).toLocaleString()}</p>
+                    </div>
+                    <div className='flex flex-col'>
+                        <p className='text-sm'>Standard</p>
+                        <p className=' text-2xl text-white'> {(52222000).toLocaleString()}</p>
+                    </div>
+                </div>
+                <p className="flex justify-center tracking-widest text-xl pt-8">LOGS</p>
+                <div className='flex justify-center py-4'>
+                    <LogsTable logs={logs} />
+                </div>
             </div>
+
 
         </div>
     )

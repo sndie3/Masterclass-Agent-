@@ -91,7 +91,6 @@ function Home() {
 
   ];
 
-  <LogsTable logs={logs} />;
 
   return (
     <div className="relative min-h-screen text-white overflow-hidden">

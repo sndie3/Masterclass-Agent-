@@ -23,7 +23,7 @@ function LogsTable({ logs }: LogsTableProps) {
                 <tbody>
                     {logs.map((log, index) => (
                         <tr key={index} className="text-gray-500 text-sm">
-                            <td className="py-1 text-center w-32 xl:w-130">{log.uid}</td>
+                            <td className="py-1 text-center w-32 md:w-70 xl:w-130">{log.uid}</td>
                             <td className="text-center">{log.gc.toLocaleString()}</td>
                             <td className="text-center">
                                 {log.ens.toLocaleString(undefined, {
