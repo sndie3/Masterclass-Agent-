@@ -41,8 +41,7 @@ function Home() {
     {
       icon: "/assets/icons/register.png",
       title: "Register",
-      route: ""
-
+      route: "/register"
     },
     {
       icon: "/assets/icons/settings.png",

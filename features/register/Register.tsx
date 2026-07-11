@@ -3,41 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Camera } from "lucide-react";
 import Footer from "../../components/common/Footer";
 
-interface SubAccount {
-  firstName: string;
-  middleName: string;
-  lastName: string;
-  mobileNumber: string;
-  birthdate: string;
-  password: string;
-  level: number;
-  photo: string | null;
-}
-
-export default function AddLevel() {
+export default function Register() {
   const navigate = useNavigate();
-
-  const [userLevel] = useState<number>(() => {
-    const saved = localStorage.getItem("userLevel");
-    return saved ? parseInt(saved, 10) : 2;
-  });
-
-  const maxLevel = 5;
-  const canCreate = userLevel < maxLevel;
-  const childLevel = canCreate ? userLevel + 1 : 0;
 
   const [form, setForm] = useState({
     firstName: "",
-    middleName: "",
     lastName: "",
     mobileNumber: "",
-    birthdate: "",
+    birthMonth: "",
+    birthDay: "",
+    birthYear: "",
     password: "",
   });
 
-  const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState<string | null>(null);
   const [showCamera, setShowCamera] = useState(false);
+  const [message, setMessage] = useState("");
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -95,33 +77,33 @@ export default function AddLevel() {
   };
 
   const handleActivate = () => {
-    if (!canCreate) {
-      setMessage("Level 5 accounts cannot create sub-accounts.");
-      return;
-    }
-
     if (!form.firstName || !form.lastName || !form.mobileNumber || !form.password) {
       setMessage("Please fill in all required fields.");
       return;
     }
 
-    const newAccount: SubAccount = {
+    if (!photo) {
+      setMessage("Please take a selfie with ID.");
+      return;
+    }
+
+    const newAccount = {
       ...form,
-      level: childLevel,
       photo,
     };
 
-    const existing: SubAccount[] = JSON.parse(localStorage.getItem("subAccounts") || "[]");
+    const existing = JSON.parse(localStorage.getItem("registeredAccounts") || "[]");
     existing.push(newAccount);
-    localStorage.setItem("subAccounts", JSON.stringify(existing));
+    localStorage.setItem("registeredAccounts", JSON.stringify(existing));
 
-    setMessage(`Level ${childLevel} account created successfully.`);
+    setMessage("Account registered successfully.");
     setForm({
       firstName: "",
-      middleName: "",
       lastName: "",
       mobileNumber: "",
-      birthdate: "",
+      birthMonth: "",
+      birthDay: "",
+      birthYear: "",
       password: "",
     });
     setPhoto(null);
@@ -139,13 +121,11 @@ export default function AddLevel() {
           >
             <ChevronLeft size={24} />
           </button>
-          <h1 className="text-lg font-bold flex-1 text-center pr-10">
-            Add Level
-          </h1>
+          <h1 className="text-lg font-bold flex-1 text-center pr-10">Register</h1>
         </div>
 
         {/* Disclaimer */}
-        <div className="text-xs text-gray-400 mb-4 text-center">
+        <div className="text-xs text-gray-400 mb-4 text-justify">
           Make sure that all information are true and correct. Any false information
           will forfeit player privilege and automatically terminate or block player
           account use and access. Privacy Policy and Terms of Use will apply.
@@ -162,13 +142,6 @@ export default function AddLevel() {
           />
           <input
             type="text"
-            placeholder="Middle Name"
-            value={form.middleName}
-            onChange={(e) => handleChange("middleName", e.target.value)}
-            className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
-          />
-          <input
-            type="text"
             placeholder="Last Name"
             value={form.lastName}
             onChange={(e) => handleChange("lastName", e.target.value)}
@@ -181,15 +154,38 @@ export default function AddLevel() {
             onChange={(e) => handleChange("mobileNumber", e.target.value)}
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
           />
-          <input
-            type="text"
-            placeholder="Birthdate"
-            value={form.birthdate}
-            onChange={(e) => handleChange("birthdate", e.target.value)}
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
-            className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
-          />
+
+          {/* Birthdate */}
+          <div className="flex gap-2 w-full">
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="MM"
+              maxLength={2}
+              value={form.birthMonth}
+              onChange={(e) => handleChange("birthMonth", e.target.value.replace(/\D/g, ""))}
+              className="w-0 flex-1 min-w-0 py-3 px-1 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
+            />
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="DD"
+              maxLength={2}
+              value={form.birthDay}
+              onChange={(e) => handleChange("birthDay", e.target.value.replace(/\D/g, ""))}
+              className="w-0 flex-1 min-w-0 py-3 px-1 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
+            />
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="YY"
+              maxLength={2}
+              value={form.birthYear}
+              onChange={(e) => handleChange("birthYear", e.target.value.replace(/\D/g, ""))}
+              className="w-0 flex-1 min-w-0 py-3 px-1 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
+            />
+          </div>
+
           <input
             type="password"
             placeholder="Password 8 characters alphanumeric"
@@ -198,7 +194,7 @@ export default function AddLevel() {
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
           />
 
-          {/* Take Picture */}
+          {/* Selfie with ID */}
           <button
             onClick={handleOpenCamera}
             className="w-full aspect-video border border-white/30 flex flex-col items-center justify-center gap-2 text-gray-400 hover:text-white transition relative overflow-hidden"
@@ -208,7 +204,7 @@ export default function AddLevel() {
             ) : (
               <>
                 <Camera size={28} />
-                <span className="text-sm">Take Picture</span>
+                <span className="text-sm">Selfie with ID</span>
               </>
             )}
           </button>
@@ -242,20 +238,10 @@ export default function AddLevel() {
             </div>
           )}
 
-          {/* Level + Activate */}
-          <div className="flex items-center gap-3 mt-2">
-            <div className="w-32 flex items-stretch border border-white">
-              <div className="px-3 py-3 border-r border-white flex items-center">
-                <span className="text-sm font-semibold">Level</span>
-              </div>
-              <div className="flex-1 flex items-center justify-center px-3 py-3">
-                <span className="text-sm font-bold">{canCreate ? childLevel : "-"}</span>
-              </div>
-            </div>
-
+          <div className="flex justify-center mt-2">
             <button
               onClick={handleActivate}
-              className="flex-1 py-3 font-semibold text-white transition hover:opacity-90"
+              className="w-48 py-3 font-semibold text-white transition hover:opacity-90"
               style={{ backgroundColor: "var(--card-color)" }}
             >
               Activate
@@ -264,12 +250,6 @@ export default function AddLevel() {
 
           {message && (
             <p className="text-sm text-center mt-2 text-gray-300">{message}</p>
-          )}
-
-          {!canCreate && (
-            <p className="text-sm text-center text-red-400 mt-2">
-              Level 5 accounts cannot create sub-accounts.
-            </p>
           )}
         </div>
       </div>
