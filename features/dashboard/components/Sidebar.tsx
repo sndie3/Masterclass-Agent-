@@ -32,13 +32,13 @@ export default function Sidebar({
 
     const handleMenuClick = (title: string) => {
         if (title === 'Profile') {
-            navigate('');
+            navigate('/profile');
             setSidebarOpen(false);
         } else if (title === 'How to Use') {
             navigate('');
             setSidebarOpen(false);
         } else if (title === 'Settings') {
-            navigate('');
+            navigate('/settings');
             setSidebarOpen(false);
         }
     };

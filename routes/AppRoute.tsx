@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import Login from "../features/auth/Login"
 import Home from "../features/dashboard/Home";
+import Profile from "../features/profile/Profile";
 export default function AppRoutes() { 
 
   return ( 
@@ -10,6 +11,7 @@ export default function AppRoutes() {
       <Route path="/"  element={<BaseLayout />}> 
           <Route index element={<Login />} />
           <Route path="dashboard" element={<Home/>}/>
+          <Route path="profile" element={<Profile/>}/>
       </Route> 
 
       {/* Protected Routes */}
