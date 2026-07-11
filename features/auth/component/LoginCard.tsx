@@ -97,7 +97,7 @@ function LoginCard() {
                 <div className="flex-1 flex flex-col justify-center">
 
                     <span className='flex justify-center'>
-                        <img src="/masterclass-logo.png" alt="masterclass-logo" className='w-35 object-contain' />
+                        <img src="/masterclass-original.png" alt="masterclass-logo" className='w-35 object-contain' />
                     </span>
                     <div className="pb-6">
                         <p
