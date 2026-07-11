@@ -46,8 +46,7 @@ function Home() {
     {
       icon: "/assets/icons/settings.png",
       title: "Settings",
-      route: ""
-
+      route: "/settings"
     },
     {
       icon: "/assets/icons/support.png",

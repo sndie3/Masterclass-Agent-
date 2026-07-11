@@ -10,6 +10,7 @@ import Earnings from "../features/earnings/Earnings"
 import Promo from "../features/promo/Promo"
 import AddLevel from "../features/addLevel/AddLevel"
 import Register from "../features/register/Register"
+import Settings from "../features/settings/Settings"
 export default function AppRoutes() {
 
   return (
@@ -26,6 +27,7 @@ export default function AppRoutes() {
         <Route path="promo" element={<Promo />}/>
         <Route path="add-level" element={<AddLevel />}/>
         <Route path="register" element={<Register />}/>
+        <Route path="settings" element={<Settings />}/>
       </Route>
 
       {/* Protected Routes */}
