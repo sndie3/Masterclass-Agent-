@@ -100,7 +100,7 @@ export default function Theme() {
   return (
     <div className="min-h-dvh text-white flex flex-col relative z-50">
       {/* Dark overlay to ensure readability */}
-      <div className="absolute inset-0 bg-black/40 z-0"></div>
+      <div className="absolute inset-0 z-0" style={{ backgroundColor: "rgba(0, 0, 0, 0.65)" }}></div>
 
       <div className="flex-1 flex flex-col relative z-10">
         {/* Header */}
