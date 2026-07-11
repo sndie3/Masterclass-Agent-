@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import BaseLayout from "../layouts/BaseLayout";
 import Login from "../features/auth/Login"
+import Reset from "../features/auth/Reset"
 import Home from "../features/dashboard/Home";
 import Profile from "../features/profile/Profile";
 import Support from "../features/support/Support"
@@ -23,6 +24,7 @@ export default function AppRoutes() {
       <Route path="/" element={<BaseLayout />}>
         <Route index element={<Login />} />
         <Route path="login" element={<Login />} />
+        <Route path="reset" element={<Reset />} />
         <Route path="dashboard" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="profile/share-referral" element={<ShareReferral />} />
