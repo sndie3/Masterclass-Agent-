@@ -10,13 +10,13 @@
   "scope": "/",
   "icons": [
     {
-      "src": "/masterclass-icon-192.png",
+      "src": "/MASTERCLASS LOGO.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/masterclass-icon-512.png",
+      "src": "/MASTERCLASS LOGO.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
