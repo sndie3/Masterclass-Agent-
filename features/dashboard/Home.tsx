@@ -28,7 +28,7 @@ function Home() {
       icon: "/assets/icons/earnings.png",
       title: "Earnings",
       count: "3,247",
-      route: ""
+      route: "/earnings"
 
     },
     {

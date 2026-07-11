@@ -60,7 +60,11 @@ function LoginCard() {
         // Validate against registered mobile number
         const registeredUsername = localStorage.getItem('registeredUsername');
         if (registeredUsername && username !== registeredUsername) {
-            alert('Username does not match registered account');
+            showModal(
+                "warning",
+                "Account Mismatch",
+                "Username does not match registered account"
+            );
             return;
         }
 
