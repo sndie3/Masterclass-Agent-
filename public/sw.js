@@ -1,11 +1,14 @@
-const CACHE_NAME = "masterclass-v2";
-const STATIC_CACHE = "masterclass-static-v2";
+const CACHE_NAME = "masterclass-v3";
+const STATIC_CACHE = "masterclass-static-v3";
 
 const PRECACHE_URLS = [
   "/",
   "/index.html",
   "/manifest.json",
   "/masterclass-logo.png",
+  "/icon-192.png",
+  "/icon-512.png",
+  "/apple-touch-icon.png",
 ];
 
 self.addEventListener("install", (event) => {

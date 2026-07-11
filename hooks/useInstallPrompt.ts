@@ -6,31 +6,56 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+export type Platform = "android" | "ios" | "desktop" | "other";
+
+export type InstallMethod = "native" | "ios-manual" | "desktop-manual";
+
+export interface InstallResult {
+  success: boolean;
+  method: InstallMethod;
+  message?: string;
+}
+
 let globalDeferredPrompt: BeforeInstallPromptEvent | null = null;
 
 if (typeof window !== "undefined") {
   const handleBeforeInstallPrompt = (event: Event) => {
     event.preventDefault();
     globalDeferredPrompt = event as BeforeInstallPromptEvent;
+    window.dispatchEvent(new CustomEvent("install-prompt-available"));
   };
 
   const handleAppInstalled = () => {
     globalDeferredPrompt = null;
+    window.dispatchEvent(new CustomEvent("app-installed"));
   };
 
   window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
   window.addEventListener("appinstalled", handleAppInstalled);
 }
 
+function detectPlatform(): Platform {
+  const ua = navigator.userAgent;
+  if (/Android/i.test(ua)) return "android";
+  if (/iPad|iPhone|iPod/.test(ua) && !(window as unknown as { MSStream?: boolean }).MSStream) return "ios";
+  if (/Win|Mac|Linux/i.test(ua) && !/Mobile|Tablet/i.test(ua)) return "desktop";
+  return "other";
+}
+
+function checkIsInstalled(): boolean {
+  if (window.matchMedia("(display-mode: standalone)").matches) return true;
+  if ((window.navigator as unknown as { standalone?: boolean }).standalone === true) return true;
+  return false;
+}
+
 export function useInstallPrompt() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(globalDeferredPrompt);
   const [isInstalled, setIsInstalled] = useState(false);
+  const [isInstalling, setIsInstalling] = useState(false);
+  const platform = detectPlatform();
 
   useEffect(() => {
-    if (window.matchMedia("(display-mode: standalone)").matches) {
-      setIsInstalled(true);
-      return;
-    }
+    setIsInstalled(checkIsInstalled());
 
     const handleBeforeInstallPrompt = (event: Event) => {
       event.preventDefault();
@@ -39,7 +64,15 @@ export function useInstallPrompt() {
 
     const handleAppInstalled = () => {
       setDeferredPrompt(null);
+      globalDeferredPrompt = null;
       setIsInstalled(true);
+      setIsInstalling(false);
+    };
+
+    const handleInstallPromptAvailable = () => {
+      if (globalDeferredPrompt) {
+        setDeferredPrompt(globalDeferredPrompt);
+      }
     };
 
     if (globalDeferredPrompt) {
@@ -48,28 +81,73 @@ export function useInstallPrompt() {
 
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
+    window.addEventListener("install-prompt-available", handleInstallPromptAvailable);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
       window.removeEventListener("appinstalled", handleAppInstalled);
+      window.removeEventListener("install-prompt-available", handleInstallPromptAvailable);
     };
   }, []);
 
-  const promptInstall = useCallback(async () => {
-    const prompt = deferredPrompt || globalDeferredPrompt;
-    if (!prompt) {
-      return false;
+  const triggerInstall = useCallback(async (): Promise<InstallResult> => {
+    if (isInstalled) {
+      return { success: true, method: "native", message: "Already installed" };
     }
 
-    await prompt.prompt();
-    const { outcome } = await prompt.userChoice;
-    setDeferredPrompt(null);
-    globalDeferredPrompt = null;
-    if (outcome === "accepted") {
-      setIsInstalled(true);
-    }
-    return outcome === "accepted";
-  }, [deferredPrompt]);
+    setIsInstalling(true);
 
-  return { isInstallable: !!(deferredPrompt || globalDeferredPrompt) && !isInstalled, isInstalled, promptInstall };
+    try {
+      if (platform === "ios") {
+        setIsInstalling(false);
+        return {
+          success: false,
+          method: "ios-manual",
+          message: "Tap the Share button at the bottom of Safari, then scroll down and tap 'Add to Home Screen' to install the app.",
+        };
+      }
+
+      const prompt = deferredPrompt || globalDeferredPrompt;
+      if (prompt) {
+        await prompt.prompt();
+        const { outcome } = await prompt.userChoice;
+        setDeferredPrompt(null);
+        globalDeferredPrompt = null;
+        setIsInstalling(false);
+        if (outcome === "accepted") {
+          setIsInstalled(true);
+          return { success: true, method: "native" };
+        }
+        return { success: false, method: "native", message: "Installation was cancelled." };
+      }
+
+      setIsInstalling(false);
+      return {
+        success: false,
+        method: "desktop-manual",
+        message: platform === "desktop"
+          ? "Click the install icon in the address bar or go to browser menu > 'Install MASTERCLASS' or 'Add to Home Screen'."
+          : "Open your browser menu and select 'Add to Home Screen' or 'Install App'.",
+      };
+    } catch {
+      setIsInstalling(false);
+      return {
+        success: false,
+        method: "native",
+        message: "An error occurred during installation. Please try again.",
+      };
+    }
+  }, [deferredPrompt, isInstalled, platform]);
+
+  const canInstallNatively = !!(deferredPrompt || globalDeferredPrompt);
+  const showInstallButton = !isInstalled;
+
+  return {
+    isInstallable: canInstallNatively && !isInstalled,
+    isInstalled,
+    isInstalling,
+    platform,
+    showInstallButton,
+    triggerInstall,
+  };
 }

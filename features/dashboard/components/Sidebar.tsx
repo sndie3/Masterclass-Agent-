@@ -32,7 +32,7 @@ export default function Sidebar({
 }: SidebarProps) {
     const navigate = useNavigate();
     const { showModal } = useModal();
-    const { isInstallable, isInstalled, promptInstall } = useInstallPrompt();
+    const { showInstallButton, isInstalling, triggerInstall } = useInstallPrompt();
 
     const handleMenuClick = (title: string) => {
         if (title === 'Profile') {
@@ -54,19 +54,12 @@ export default function Sidebar({
     };
 
     const handleInstallClick = async () => {
-        if (isInstallable) {
-            await promptInstall();
-            return;
+        const result = await triggerInstall();
+        if (!result.success && result.message) {
+            showModal("info", "Install MASTERCLASS", result.message);
+        } else if (result.success && result.method === "native") {
+            showModal("success", "Installed", "MASTERCLASS has been installed successfully!");
         }
-
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as unknown as { MSStream?: boolean }).MSStream;
-        showModal(
-            "info",
-            "Install MASTERCLASS",
-            isIOS
-                ? "Tap the Share button in Safari, then select 'Add to Home Screen' to install this app."
-                : "Open your browser menu and select 'Add to Home Screen' or 'Install App' to install this app."
-        );
     };
 
     const handleLogout = () => {
@@ -152,12 +145,13 @@ export default function Sidebar({
                         ))}
                     </div>
 
-                        {!isInstalled && (
+                        {showInstallButton && (
                             <button
                                 onClick={handleInstallClick}
-                                className="w-full px-6 py-4 text-[20px] font-semibold flex items-center hover:bg-[var(--hover-color)] transition gap-2"
+                                disabled={isInstalling}
+                                className="w-full px-6 py-4 text-[20px] font-semibold flex items-center hover:bg-[var(--hover-color)] transition gap-2 disabled:opacity-50"
                             >
-                                Install
+                                {isInstalling ? "Installing..." : "Install"}
                             </button>
                         )}
                     <div className="flex flex-col px-7 py-4 gap-2">
