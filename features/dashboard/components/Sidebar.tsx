@@ -2,7 +2,6 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../../components/common/Footer";
 import { useInstallPrompt } from '../../../hooks/useInstallPrompt'
-import { useModal } from '../../../context/ModalContext';
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -31,8 +30,7 @@ export default function Sidebar({
     verificationStatus,
 }: SidebarProps) {
     const navigate = useNavigate();
-    const { showModal } = useModal();
-    const { isInstallable, isInstalled, promptInstall } = useInstallPrompt();
+    const { isInstallable, promptInstall } = useInstallPrompt();
 
     const handleMenuClick = (title: string) => {
         if (title === 'Profile') {
@@ -54,25 +52,7 @@ export default function Sidebar({
     };
 
     const handleInstallClick = async () => {
-        if (isInstallable) {
-            await promptInstall();
-            return;
-        }
-
-        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as unknown as { MSStream?: boolean }).MSStream;
-        if (isIOS) {
-            showModal(
-                "info",
-                "Install MASTERCLASS",
-                "Tap the Share button in Safari, then select 'Add to Home Screen' to install this app."
-            );
-        } else {
-            showModal(
-                "info",
-                "Install MASTERCLASS",
-                "Open your browser menu and select 'Add to Home Screen' or 'Install App' to install this app."
-            );
-        }
+        await promptInstall();
     };
 
     const handleLogout = () => {
@@ -158,7 +138,7 @@ export default function Sidebar({
                         ))}
                     </div>
 
-                        {!isInstalled && (
+                        {isInstallable && (
                             <button
                                 onClick={handleInstallClick}
                                 className="w-full px-6 py-4 text-[20px] font-semibold flex items-center hover:bg-[var(--hover-color)] transition gap-2"

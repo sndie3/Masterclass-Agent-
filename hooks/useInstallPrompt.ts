@@ -6,8 +6,24 @@ interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
+let globalDeferredPrompt: BeforeInstallPromptEvent | null = null;
+
+if (typeof window !== "undefined") {
+  const handleBeforeInstallPrompt = (event: Event) => {
+    event.preventDefault();
+    globalDeferredPrompt = event as BeforeInstallPromptEvent;
+  };
+
+  const handleAppInstalled = () => {
+    globalDeferredPrompt = null;
+  };
+
+  window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+  window.addEventListener("appinstalled", handleAppInstalled);
+}
+
 export function useInstallPrompt() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(globalDeferredPrompt);
   const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
@@ -26,6 +42,10 @@ export function useInstallPrompt() {
       setIsInstalled(true);
     };
 
+    if (globalDeferredPrompt) {
+      setDeferredPrompt(globalDeferredPrompt);
+    }
+
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
     window.addEventListener("appinstalled", handleAppInstalled);
 
@@ -36,15 +56,20 @@ export function useInstallPrompt() {
   }, []);
 
   const promptInstall = useCallback(async () => {
-    if (!deferredPrompt) {
+    const prompt = deferredPrompt || globalDeferredPrompt;
+    if (!prompt) {
       return false;
     }
 
-    await deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
+    await prompt.prompt();
+    const { outcome } = await prompt.userChoice;
     setDeferredPrompt(null);
+    globalDeferredPrompt = null;
+    if (outcome === "accepted") {
+      setIsInstalled(true);
+    }
     return outcome === "accepted";
   }, [deferredPrompt]);
 
-  return { isInstallable: !!deferredPrompt && !isInstalled, isInstalled, promptInstall };
+  return { isInstallable: !!(deferredPrompt || globalDeferredPrompt) && !isInstalled, isInstalled, promptInstall };
 }
