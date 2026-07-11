@@ -4,6 +4,7 @@ import { ChevronRight, CircleChevronLeft, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import LogsTable from '../../components/common/LogsTable'
 import DashboardCard from './components/DashboardCard'
+import { useInstallPrompt } from '../../hooks/useInstallPrompt';
 function Home() {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -16,6 +17,7 @@ function Home() {
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
+  const { isInstallable, isInstalled, promptInstall } = useInstallPrompt();
 
   const menus = [
     {
@@ -120,9 +122,14 @@ function Home() {
             <span className="text-sm font-semibold flex justify-center cursor-pointer font-bahnschrift">
               <img src="/assets/icons/notification.png" alt="notification" className='w-8 object-contain' />
             </span>
-            <button className="bg-[var(--button-color)] py-2 px-5 rounded-full text-sm">
-              INSTALL
-            </button>
+            {isInstallable && !isInstalled && (
+              <button
+                onClick={promptInstall}
+                className="bg-[var(--button-color)] py-2 px-5 rounded-full text-sm"
+              >
+                INSTALL
+              </button>
+            )}
           </div>
 
         </div>
