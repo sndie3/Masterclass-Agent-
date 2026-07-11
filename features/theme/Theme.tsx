@@ -21,6 +21,14 @@ const themes: { id: Theme; image: string }[] = [
   { id: "14", image: themeImages["14"] },
   { id: "15", image: themeImages["15"] },
   { id: "16", image: themeImages["16"] },
+  { id: "17", image: themeImages["17"] },
+  { id: "18", image: themeImages["18"] },
+  { id: "19", image: themeImages["19"] },
+  { id: "20", image: themeImages["20"] },
+  { id: "21", image: themeImages["21"] },
+  { id: "22", image: themeImages["22"] },
+  { id: "23", image: themeImages["23"] },
+  { id: "24", image: themeImages["24"] },
 ];
 
 const getThemeLabel = (index: number) => `Theme ${index + 1}`;

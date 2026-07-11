@@ -1,10 +1,11 @@
 export type Theme =
   | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10'
-  | '11' | '12' | '13' | '14' | '15' | '16';
+  | '11' | '12' | '13' | '14' | '15' | '16' | '17' | '18' | '19' | '20'
+  | '21' | '22' | '23' | '24';
 
 export const themeImages: Record<Theme, string> = {
   '1': '',
-  '2': '/assets/masterclass theme/1.jpg',
+  '2': '/assets/masterclass theme/1.png',
   '3': '/assets/masterclass theme/2.jpg',
   '4': '/assets/masterclass theme/3.jpg',
   '5': '/assets/masterclass theme/4.jpg',
@@ -12,13 +13,21 @@ export const themeImages: Record<Theme, string> = {
   '7': '/assets/masterclass theme/6.jpg',
   '8': '/assets/masterclass theme/7.jpg',
   '9': '/assets/masterclass theme/8.jpg',
-  '10': '/assets/masterclass theme/9.jpg',
-  '11': '/assets/masterclass theme/10.jpg',
+  '10': '/assets/masterclass theme/9.jpeg',
+  '11': '/assets/masterclass theme/10.png',
   '12': '/assets/masterclass theme/11.jpg',
-  '13': '/assets/masterclass theme/12.jpg',
+  '13': '/assets/masterclass theme/12.webp',
   '14': '/assets/masterclass theme/13.jpg',
   '15': '/assets/masterclass theme/14.jpg',
   '16': '/assets/masterclass theme/15.jpg',
+  '17': '/assets/masterclass theme/16.jpg',
+  '18': '/assets/masterclass theme/17.jpg',
+  '19': '/assets/masterclass theme/18.jpg',
+  '20': '/assets/masterclass theme/19.jpg',
+  '21': '/assets/masterclass theme/20.jpg',
+  '22': '/assets/masterclass theme/21.jpg',
+  '23': '/assets/masterclass theme/22.jpg',
+  '24': '/assets/masterclass theme/23.jpg',
 };
 
 export function applyTheme(theme: Theme) {

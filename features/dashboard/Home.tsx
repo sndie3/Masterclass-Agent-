@@ -22,7 +22,7 @@ function Home() {
       icon: "/assets/icons/add-level.png",
       title: "Add Level",
       count: "3",
-      route: ""
+      route: "/add-level"
     },
     {
       icon: "/assets/icons/earnings.png",
