@@ -1,5 +1,5 @@
 import { Outlet} from "react-router-dom";
-import Footer from "../components/common/Footer";
+// import Footer from "../components/common/Footer";
 //import {useLocation} from "react-router-dom";
 export default function BaseLayout() {
   //const location = useLocation();
@@ -12,7 +12,7 @@ export default function BaseLayout() {
         <Outlet />
 
         {/* Footer - not shown on register/reset pages */}
-       <Footer />
+       {/* <Footer /> */}
         {/* {!isAuthPage && (
            <div className="px-5">
             <Footer />
