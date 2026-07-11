@@ -1,15 +1,17 @@
 import React from "react";
 
 interface InputInterface {
-    type: "text" | "number" | "email" | "password";
+    type: "text" | "number" | "email" | "password" | "tel"
     inputMode?: any
     placeholder?: any
     maxLength?: number
     value?: any
-    onChange?: any
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     pattern?: any
     "custom-style"?: string,
     style?: any
+    numbersOnly?: boolean;
+
 }
 /**
  * 
@@ -25,6 +27,7 @@ interface InputInterface {
     onChange={onChange}
     style={style}
     customStyle=""
+    number={true/false}
     />
  */
 const CustomInput: React.FC<InputInterface> = ({
@@ -35,19 +38,28 @@ const CustomInput: React.FC<InputInterface> = ({
     value,
     onChange,
     style,
+    pattern,
+    numbersOnly = false,
     "custom-style": customStyle,
 }) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (numbersOnly) {
+            e.target.value = e.target.value.replace(/\D/g, "");
+        }
 
+        onChange?.(e);
+    };
     return (
         <>
             <input
                 type={type}
-                inputMode={inputMode}
+                inputMode={numbersOnly ? "numeric" : inputMode}
                 maxLength={maxLength}
                 placeholder={placeholder}
                 value={value}
-                onChange={onChange}
+                onChange={handleChange}
                 style={style}
+                pattern={numbersOnly ? "[0-9]*" : pattern}
                 className={`${customStyle} font-["Calibri_Light",Calibri,sans-serif] text-[clamp(14px,1.5vw,18px)] w-full py-3 px-4 bg-transparent border border-[#333] text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white`}
             />
         </>

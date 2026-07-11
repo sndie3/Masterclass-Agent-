@@ -1,6 +1,8 @@
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, CircleChevronLeft } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import LogsTable from "../../components/common/LogsTable";
+import DashboardCard from "../dashboard/components/DashboardCard";
+
 function Earnings() {
 
     const route = useNavigate()
@@ -48,7 +50,7 @@ function Earnings() {
                         <ArrowLeft size={20} className="text-white" />
                     </button>
                     <h1 className="text-[24px] font-semibold ">Earnings</h1>
-                    <p/>
+                    <p />
                 </div>
             </div>
 
@@ -59,15 +61,14 @@ function Earnings() {
                 <br />
                 <p className="text-gray-400 text-sm">PLAY RESPONSIBLY.</p>
                 <br />
+
                 <div className="flex justify-evenly">
-                    <div className='flex flex-col'>
-                        <p className='text-sm'>Speciality</p>
-                        <p className=' text-2xl text-white'> {(10022220).toLocaleString()}</p>
-                    </div>
-                    <div className='flex flex-col'>
-                        <p className='text-sm'>Standard</p>
-                        <p className=' text-2xl text-white'> {(52222000).toLocaleString()}</p>
-                    </div>
+                    <DashboardCard title="Specialty" walletData={123456}>
+                        <CircleChevronLeft className='w-8 h-8' />
+                    </DashboardCard>
+                    <DashboardCard title="Standard" walletData={123456}>
+                        <CircleChevronLeft className='w-8 h-8' />
+                    </DashboardCard>
                 </div>
                 <p className="flex justify-center tracking-widest text-xl pt-8">LOGS</p>
                 <div className='flex justify-center py-4'>

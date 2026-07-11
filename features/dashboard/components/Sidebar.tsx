@@ -1,6 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../../components/common/Footer";
+import { useInstallPrompt } from '../../../hooks/useInstallPrompt'
 
 interface SidebarProps {
     sidebarOpen: boolean;
@@ -29,6 +30,7 @@ export default function Sidebar({
     verificationStatus,
 }: SidebarProps) {
     const navigate = useNavigate();
+  const { isInstallable, isInstalled, promptInstall } = useInstallPrompt();
 
     const handleMenuClick = (title: string) => {
         if (title === 'Profile') {
@@ -53,7 +55,7 @@ export default function Sidebar({
         // Clear only the session data (userMobileNumber) so they are logged out
         // We keep userProfile, username, verificationStatus, etc. so their data persists when they log back in
         localStorage.removeItem('userMobileNumber');
-        
+
         // Navigate to login page
         navigate('/login');
     };
@@ -86,12 +88,12 @@ export default function Sidebar({
                         >
                             <img src="/assets/icons/settings.png" alt="setting" className="w-8 h-9 rounded-full object-contain" />
                         </button>
-                        <button 
-                        onClick={() => {
+                        <button
+                            onClick={() => {
                                 navigate('/promo');
                                 setSidebarOpen(false);
                             }}
-                        className="p-0 bg-transparent border-none cursor-pointer">
+                            className="p-0 bg-transparent border-none cursor-pointer">
                             <img src="/assets/icons/ribbon.png" alt="ribbon" className="w-8 h-9 rounded-full object-contain" />
                         </button>
                     </div>
@@ -131,6 +133,15 @@ export default function Sidebar({
                             </button>
                         ))}
                     </div>
+
+                        {isInstallable && !isInstalled && (
+                            <button
+                                onClick={promptInstall}
+                                className="w-full px-6 py-4 text-[20px] font-semibold flex items-center hover:bg-[var(--hover-color)] transition gap-2"
+                            >
+                                Install
+                            </button>
+                        )}
                     <div className="flex flex-col px-7 py-4 gap-2">
                         <button
                             onClick={handleLogout}

@@ -161,11 +161,7 @@ function LoginCard() {
                             RESET
                         </button>
                     </div>
-
                 </div>
-
-                {/* Disclaimer */}
-
             </div>
         </div>
 

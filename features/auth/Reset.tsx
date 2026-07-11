@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import CustomInput from "../../components/ui/InputBox";
 
 export default function Reset() {
   const navigate = useNavigate();
 
   const [mobileNumber, setMobileNumber] = useState("");
+  const [oldPassword, setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [otp, setOtp] = useState("");
@@ -66,13 +68,21 @@ export default function Reset() {
         </div>
 
         {/* Disclaimer */}
-        <div className="text-xs text-gray-400 mb-6 text-left leading-relaxed">
+        <div className="text-md text-gray-400 mb-6 text-left leading-relaxed">
           Make sure that the number is correct and order and also a pin will be send to your email account for a 2 way verification process.
         </div>
 
         {/* Reset Form */}
         <div className="flex flex-col gap-3">
-          <input
+          <CustomInput
+            type='tel'
+            inputMode="numeric"
+            placeholder="Input your 11 digit number"
+            maxLength={11}
+            numbersOnly={true}
+            onChange={(e) => setMobileNumber(e.target.value)}
+          />
+          {/* <input
             type="tel"
             inputMode="numeric"
             placeholder="Input your 11 digit number"
@@ -80,14 +90,15 @@ export default function Reset() {
             value={mobileNumber}
             onChange={(e) => setMobileNumber(e.target.value.replace(/\D/g, ""))}
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
-          />
-          <input
+          /> 
+                    <input
             type="password"
             placeholder="New password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
           />
+          
           <input
             type="password"
             placeholder="Confirm password"
@@ -95,7 +106,34 @@ export default function Reset() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
           />
-
+           <input
+            type="tel"
+            inputMode="numeric"
+            placeholder="Input your 6 digit OTP"
+            maxLength={6}
+            value={otp}
+            onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+            className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
+          />
+          */}
+          <CustomInput
+            type='password'
+            onChange={(e) => setOldPassword(e.target.value)}
+            placeholder="Password"
+            value={oldPassword}
+          />
+          <CustomInput
+            type='password'
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            placeholder="New password"
+          />
+          <CustomInput
+            type='password'
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm password"
+            value={confirmPassword}
+          />
           <div className="flex justify-center mt-2">
             <button
               onClick={handleReset}
@@ -109,16 +147,15 @@ export default function Reset() {
 
         {/* OTP Form */}
         <div className="flex flex-col gap-3 mt-10">
-          <input
-            type="tel"
+          <CustomInput
+            type='tel'
             inputMode="numeric"
             placeholder="Input your 6 digit OTP"
             maxLength={6}
             value={otp}
-            onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
-            className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
+            onChange={(e) => setOtp(e.target.value)}
+            numbersOnly={true}
           />
-
           <div className="flex justify-center mt-2">
             <button
               onClick={handleSubmit}
