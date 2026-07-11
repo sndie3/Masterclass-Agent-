@@ -11,6 +11,7 @@ import Promo from "../features/promo/Promo"
 import AddLevel from "../features/addLevel/AddLevel"
 import Register from "../features/register/Register"
 import Settings from "../features/settings/Settings"
+import ChatSettings from "../features/settings/ChatSettings"
 import ShareReferral from "../features/profile/ShareRefferal"
 
 export default function AppRoutes() {
@@ -32,6 +33,7 @@ export default function AppRoutes() {
         <Route path="add-level" element={<AddLevel />}/>
         <Route path="register" element={<Register />}/>
         <Route path="settings" element={<Settings />}/>
+        <Route path="chat-settings" element={<ChatSettings />}/>
       </Route>
 
       {/* Protected Routes */}
