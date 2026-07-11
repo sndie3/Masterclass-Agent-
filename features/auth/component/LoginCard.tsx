@@ -164,14 +164,7 @@ function LoginCard() {
                         LOGIN
                     </button>
 
-                    <div className="flex justify-between mt-15 text-lg font-bold">
-                        <button
-                            className="cursor-pointer"
-                            onClick={() => navigate("/register")}
-                        >
-                            REGISTER
-                        </button>
-
+                    <div className="flex justify-end mt-15 text-lg font-bold">
                         <button
                             className="cursor-pointer"
                             onClick={() => navigate("/reset")}
