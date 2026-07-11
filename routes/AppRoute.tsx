@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"; 
 import BaseLayout from "../layouts/BaseLayout";
 import Login from "../features/auth/Login"
+import Home from "../features/dashboard/Home";
 export default function AppRoutes() { 
 
   return ( 
@@ -8,6 +9,7 @@ export default function AppRoutes() {
       {/* Main Website */} 
       <Route path="/"  element={<BaseLayout />}> 
           <Route index element={<Login />} />
+          <Route path="dashboard" element={<Home/>}/>
       </Route> 
 
       {/* Protected Routes */}
