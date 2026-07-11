@@ -7,6 +7,7 @@ import Support from "../features/support/Support"
 import Theme from "../features/theme/Theme"
 import Notifications from "../features/notification/Notifications"
 import Earnings from "../features/earnings/Earnings"
+import Promo from "../features/promo/Promo"
 export default function AppRoutes() {
 
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
         <Route path="notifications" element={<Notifications />} />
         <Route path="support" element={<Support />} />
         <Route path="earnings" element={<Earnings/>}/>
+        <Route path="promo" element={<Promo />}/>
       </Route>
 
       {/* Protected Routes */}

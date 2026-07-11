@@ -88,7 +88,7 @@ export default function Sidebar({
                         </button>
                         <button 
                         onClick={() => {
-                                navigate('/gift');
+                                navigate('/promo');
                                 setSidebarOpen(false);
                             }}
                         className="p-0 bg-transparent border-none cursor-pointer">

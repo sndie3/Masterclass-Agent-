@@ -35,7 +35,7 @@ function Home() {
       icon: "/assets/icons/ribbon.png",
       title: "Promo",
       count: "12",
-      route: ""
+      route: "/promo"
 
     },
     {
