@@ -3,7 +3,7 @@ const CACHE_NAME = "masterclass-v1";
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(["/", "/index.html", "/manifest.json"]);
+      return cache.addAll(["/", "/index.html", "/manifest.json", "/masterclass-logo.png"]);
     }).catch(() => {
       // Continue even if caching fails; presence of the SW is enough for PWA installability.
     })
