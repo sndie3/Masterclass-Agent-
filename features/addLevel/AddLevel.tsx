@@ -100,9 +100,40 @@ export default function AddLevel() {
     handleCloseCamera();
   };
 
-  const handleChange = (field: keyof typeof form, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-  };
+const handleChange = (field: keyof SubAccount, value: string) => {
+  switch (field) {
+    case "firstName":
+    case "middleName":
+    case "lastName":
+      value = value.replace(/[^a-zA-Z\s'-]/g, "");
+      break;
+
+    case "mobileNumber":
+      value = value.replace(/\D/g, "").slice(0, 11);
+      break;
+
+    case "birthMonth":
+      value = value.replace(/\D/g, "").slice(0, 2);
+      if (value && Number(value) > 12) value = "12";
+      if (value === "00") value = "01";
+      break;
+
+    case "birthDay":
+      value = value.replace(/\D/g, "").slice(0, 2);
+      if (value && Number(value) > 31) value = "31";
+      if (value === "00") value = "01";
+      break;
+
+    case "birthYear":
+      value = value.replace(/\D/g, "").slice(0, 4);
+      break;
+  }
+
+  setForm((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+};
 
   const handleActivate = () => {
     if (!canCreate) {
@@ -211,8 +242,8 @@ export default function AddLevel() {
               inputMode="numeric"
               placeholder="MM"
               maxLength={2}
-              value={form.birthDay}
-              onChange={(e) => handleChange("birthDay", e.target.value)}
+              value={form.birthMonth}
+              onChange={(e) => handleChange("birthMonth", e.target.value)}
               className="w-full bg-transparent border border-white/30 rounded px-4 py-2 text-center text-white placeholder:text-[#666] focus:outline-none focus:border-white transition-colors"
               style={{ fontFamily: '"Calibri Light", Calibri, sans-serif', fontSize: 'clamp(14px, 1.5vw, 18px)' }}
             />
@@ -221,9 +252,8 @@ export default function AddLevel() {
               inputMode="numeric"
               placeholder="DD"
               maxLength={2}
-              value={form.birthMonth}
-              onChange={(e) => handleChange("birthMonth", e.target.value)}
-
+              value={form.birthDay}
+              onChange={(e) => handleChange("birthDay", e.target.value)}
               className="w-full bg-transparent border border-white/30 rounded px-4 px-4 py-2 text-center text-white placeholder:text-[#666] focus:outline-none focus:border-white transition-colors"
               style={{ fontFamily: '"Calibri Light", Calibri, sans-serif', fontSize: 'clamp(14px, 1.5vw, 18px)' }}
             />

@@ -78,7 +78,38 @@ export default function Register() {
   };
 
   const handleChange = (field: keyof typeof form, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    switch (field) {
+      case "firstName":
+      case "middleName":
+      case "lastName":
+        value = value.replace(/[^a-zA-Z\s'-]/g, "");
+        break;
+
+      case "mobileNumber":
+        value = value.replace(/\D/g, "").slice(0, 11);
+        break;
+
+      case "birthMonth":
+        value = value.replace(/\D/g, "").slice(0, 2);
+        if (value && Number(value) > 12) value = "12";
+        if (value === "00") value = "01";
+        break;
+
+      case "birthDay":
+        value = value.replace(/\D/g, "").slice(0, 2);
+        if (value && Number(value) > 31) value = "31";
+        if (value === "00") value = "01";
+        break;
+
+      case "birthYear":
+        value = value.replace(/\D/g, "").slice(0, 4);
+        break;
+    }
+
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   const handleActivate = () => {

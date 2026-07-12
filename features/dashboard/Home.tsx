@@ -187,7 +187,7 @@ function Home() {
             onClick={() => navigate("/customer-support")}
           >
             <Search size={18} className="shrink-0" />
-            <span>Tell me anything</span>
+            <span>How can we help?</span>
           </button>
           <button
             onClick={() => setCollapsed(!collapsed)}
