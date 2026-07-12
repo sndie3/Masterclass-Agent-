@@ -84,7 +84,7 @@ export default function Reset() {
   };
 
   return (
-    <div className="min-h-dvh flex flex-col text-white relative overflow-hidden">
+    <div className="min-h-dvh flex flex-col text-white relative overflow-hidden bg-black ">
       <div className="flex flex-col flex-1 w-full px-4 py-6 sm:px-8 sm:py-8 md:px-12 md:py-12 lg:px-16 max-w-[1200px] mx-auto">
         <div className="flex-1 flex flex-col px-5 pt-4 pb-6 overflow-y-auto">
           {/* Header */}
