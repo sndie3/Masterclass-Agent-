@@ -18,6 +18,7 @@ import DeactivateAccount from "../features/settings/DeactivateAccount"
 import ShareReferral from "../features/profile/ShareRefferal"
 import Change from "../features/changepass/Change"
 import LinkPlayer from "../features/linkPlayer/LinkPlayer"
+import CustomerSupport from "../features/dashboard/CustomerSupport"
 
 export default function AppRoutes() {
 
@@ -44,6 +45,7 @@ export default function AppRoutes() {
         <Route path="deactivate-account" element={<DeactivateAccount />}/>
         <Route path="change-password" element={<Change />}/>
         <Route path="link-player-account" element={<LinkPlayer />}/>
+        <Route path="customer-support" element={<CustomerSupport/>}/>
       </Route>
 
       {/* Protected Routes */}
