@@ -32,7 +32,7 @@ function CustomerSupport() {
             </div>
             <div className="flex flex-col flex-1 overflow-hidden">
                 {/* Chat list */}
-                <div className="flex-1 overflow-y-auto p-4 font-bahnschrift">
+                <div className="overflow-y-auto p-4 font-bahnschrift">
                     <div className="flex justify-start">
                         <div className="max-w-[90%] rounded-2xl rounded-bl-md bg-[#1A1A1A] px-4 py-3 shadow-sm">
                             <p className="text-md leading-6 text-white">
@@ -44,25 +44,26 @@ function CustomerSupport() {
                         </div>
                     </div>
                 </div>
-                {/* Chat input - always at bottom */}
-               
+
             </div>
- <div
-                    className="shrink-0 flex items-center gap-2 p-3 border-t border-[#333]"
-                    style={{ backgroundColor: "var(--button-color)" }}
-                >
-                    <input
-                        autoFocus
-                        type="text"
-                        placeholder="Type a message..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        className="flex-1 bg-[#111] rounded-full px-4 py-3 outline-none"
-                    />
-                    <button className="px-5 py-3">
-                        <SendHorizonal />
-                    </button>
-                </div>
+            {/* Chat input - always at bottom */}
+
+            <div
+                className="shrink-0 flex items-center gap-2 p-3 border-t border-[#333]"
+                style={{ backgroundColor: "var(--button-color)" }}
+            >
+                <input
+                    autoFocus
+                    type="text"
+                    placeholder="Type a message..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    className="flex-1 bg-[#111] rounded-full px-4 py-3 outline-none"
+                />
+                <button className="px-5 py-3">
+                    <SendHorizonal />
+                </button>
+            </div>
 
         </div>
     )
