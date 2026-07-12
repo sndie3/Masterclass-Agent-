@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Camera } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import { useModal } from "../../context/ModalContext";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -18,8 +19,7 @@ export default function Register() {
 
   const [photo, setPhoto] = useState<string | null>(null);
   const [showCamera, setShowCamera] = useState(false);
-  const [message, setMessage] = useState("");
-
+  const { showModal } = useModal();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -36,7 +36,11 @@ export default function Register() {
         videoRef.current.play();
       }
     } catch (err) {
-      setMessage("Could not access camera. Please allow camera permission.");
+      showModal(
+        "warning",
+        "Camera Access Denied",
+        "Could not access the camera. Please allow camera permission and try again."
+      );
       setShowCamera(false);
     }
   };
@@ -78,12 +82,20 @@ export default function Register() {
 
   const handleActivate = () => {
     if (!form.firstName || !form.lastName || !form.mobileNumber || !form.password) {
-      setMessage("Please fill in all required fields.");
+      showModal(
+        "warning",
+        "Missing Required Fields",
+        "Please fill in all required fields."
+      );
       return;
     }
 
     if (!photo) {
-      setMessage("Please take a selfie with ID.");
+      showModal(
+        "warning",
+        "Selfie with ID Required",
+        "Please take a selfie with your ID before continuing."
+      );
       return;
     }
 
@@ -96,7 +108,11 @@ export default function Register() {
     existing.push(newAccount);
     localStorage.setItem("registeredAccounts", JSON.stringify(existing));
 
-    setMessage("Account registered successfully.");
+    showModal(
+      "success",
+      "Registration Successful",
+      "Your account has been registered successfully."
+    ); 
     setForm({
       firstName: "",
       lastName: "",
@@ -248,9 +264,7 @@ export default function Register() {
             </button>
           </div>
 
-          {message && (
-            <p className="text-sm text-center mt-2 text-gray-300">{message}</p>
-          )}
+
         </div>
       </div>
 

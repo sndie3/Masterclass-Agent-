@@ -2,15 +2,21 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import Button from "../../components/ui/Button";
+import { useModal } from "../../context/ModalContext";
 
 export default function DeactivateAccount() {
   const navigate = useNavigate();
   const [reason, setReason] = useState("");
-  const [message, setMessage] = useState("");
+
 
   const handleDeactivate = () => {
     if (!reason.trim()) {
-      setMessage("Please provide a reason for deactivation.");
+      showModal(
+        "warning",
+        "Reason Required",
+        "Please provide a reason for deactivation"
+      );
       return;
     }
 
@@ -19,7 +25,11 @@ export default function DeactivateAccount() {
     localStorage.removeItem("userMobileNumber");
     localStorage.removeItem("userUsername");
 
-    setMessage("Account deactivated.");
+    showModal(
+      "success",
+      "Account Deactivated",
+      "Your account has been deactivated successfully."
+    );
     setReason("");
 
     setTimeout(() => {
@@ -27,6 +37,7 @@ export default function DeactivateAccount() {
     }, 1500);
   };
 
+  const { showModal } = useModal();
   return (
     <div className="min-h-dvh flex flex-col text-white relative overflow-hidden">
       <div className="flex-1 flex flex-col px-5 pt-4 pb-6 overflow-y-auto">
@@ -53,27 +64,20 @@ export default function DeactivateAccount() {
           style={{ backgroundColor: "var(--card-color)" }}
         />
 
-        {/* Deactivate Button */}
-        <button
+        <Button
           onClick={handleDeactivate}
           disabled={!reason.trim()}
-          className={`w-full py-4 font-bold uppercase text-white transition ${
-            reason.trim() ? "hover:opacity-90" : "opacity-50 cursor-not-allowed"
-          }`}
-          style={{ backgroundColor: "var(--card-color)" }}
-        >
+          variant="opacitysecondary"
+          className={`w-full ${reason.trim() ? "hover:opacity-90" : "opacity-50 cursor-not-allowed"
+            }`}>
           Deactivate Now
-        </button>
-
-        {message && (
-          <p className="text-sm text-center mt-4 text-gray-300">{message}</p>
-        )}
+        </Button>
 
         {/* Policies Link */}
         <div className="flex-1 flex items-end justify-center pb-6">
           <button
             onClick={() => navigate("/policies")}
-            className="text-sm font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition"
+            className="text-sm font-semibold uppercase tracking-widest text-gray-400 hover:text-white transition cursor-pointer"
           >
             Policies
           </button>

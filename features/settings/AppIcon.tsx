@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
 import { applyAppIcon, getSavedAppIcon } from "../../utils/appIcon";
+import Button from "../../components/ui/Button";
+import { useModal } from "../../context/ModalContext";
 
 const icons = [
   { id: "/assets/app-icons/icon1.png", label: "Violet", alt: "MASTERCLASS LOGO VIOLET" },
@@ -18,19 +20,27 @@ export default function AppIcon() {
   const [selectedIcon, setSelectedIcon] = useState(() => {
     return getSavedAppIcon() || DEFAULT_ICON;
   });
-  const [message, setMessage] = useState("");
 
+  const {showModal} = useModal()
   const handleActivate = () => {
     localStorage.setItem(STORAGE_KEY, selectedIcon);
     applyAppIcon(selectedIcon);
-    setMessage("App icon updated successfully.");
+    showModal(
+        "success",
+        "Icon Updated", 
+        "App icon updated successfully."
+      );
   };
 
   const handleDefault = () => {
     setSelectedIcon(DEFAULT_ICON);
     localStorage.setItem(STORAGE_KEY, DEFAULT_ICON);
     applyAppIcon(DEFAULT_ICON);
-    setMessage("Default app icon restored.");
+     showModal(
+        "success",
+        "App Icon Reset",
+        "Your app icon has been restored to the default."
+      );
   };
 
   return (
@@ -48,12 +58,12 @@ export default function AppIcon() {
           <h1 className="text-lg font-bold w-full text-center uppercase">
             App Icon
           </h1>
-          <button
+          <Button
+            variant="opacitysecondary"
             onClick={handleDefault}
-            className="px-5 py-2 rounded-lg bg-[#1E1E1E] text-white text-sm font-semibold border border-white/10 absolute right-0"
           >
             Default
-          </button>
+          </Button>
         </div>
 
         {/* Icon Options */}
@@ -63,13 +73,11 @@ export default function AppIcon() {
               key={icon.id}
               onClick={() => {
                 setSelectedIcon(icon.id);
-                setMessage("");
               }}
-              className={`relative p-2 rounded-xl transition flex flex-col items-center ${
-                selectedIcon === icon.id
-                  ? "ring-2 ring-white"
-                  : "opacity-70 hover:opacity-100"
-              }`}
+              className={`relative p-2 rounded-xl transition flex flex-col items-center ${selectedIcon === icon.id
+                ? "ring-2 ring-white"
+                : "opacity-70 hover:opacity-100"
+                }`}
             >
               <img
                 src={icon.id}
@@ -90,18 +98,13 @@ export default function AppIcon() {
               className="w-32 h-32 object-contain"
             />
           </div>
-
-          <button
+          <Button
+            variant="opacitysecondary"
             onClick={handleActivate}
-            className="w-full max-w-xs py-4 text-sm font-semibold uppercase transition hover:opacity-90"
-            style={{ backgroundColor: "var(--card-color)" }}
+            className="w-full"
           >
             Activate
-          </button>
-
-          {message && (
-            <p className="text-sm text-center text-gray-300">{message}</p>
-          )}
+          </Button>
         </div>
       </div>
 

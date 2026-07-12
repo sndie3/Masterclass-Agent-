@@ -4,6 +4,7 @@ import { useChatWallpaper } from "../../hooks/useChatWallpaper";
 import { chatWallpaperImages, applyChatWallpaper, type ChatWallpaper } from "../../utils/chatWallpaper";
 import { ArrowLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import Button from "../../components/ui/Button";
 
 type CarouselWallpaper = {
   id: ChatWallpaper;
@@ -109,19 +110,15 @@ export default function ChatWallpaper() {
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-[18px] font-bold">
-                Roger Dela Cruz{" "}
-                <span className="border-b-2 border-red-600">Nicon</span>
+                Roger Dela Cruz Nicon
               </h2>
               <p className="text-[14px] text-gray-400 mt-0.5">
                 Lv2-ROGER-000053-2026
               </p>
             </div>
-            <button
-              onClick={handleDefault}
-              className="px-6 py-2 rounded-lg bg-[#1E1E1E] text-white text-sm font-semibold border border-white/10"
-            >
+            <Button variant="opacitysecondary" onClick={handleDefault}>
               Default
-            </button>
+            </Button>
           </div>
         </div>
 
@@ -210,15 +207,13 @@ export default function ChatWallpaper() {
                     <img
                       src={wallpaper.image}
                       alt={wallpaper.label}
-                      className={`w-full h-full object-cover rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/10 ${
-                        isCenter ? "brightness-100" : "brightness-90"
-                      }`}
+                      className={`w-full h-full object-cover rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/10 ${isCenter ? "brightness-100" : "brightness-90"
+                        }`}
                     />
                   ) : (
                     <div
-                      className={`w-full h-full rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/10 bg-[linear-gradient(180deg,#151515_0%,#090909_100%)] flex flex-col items-center justify-center px-6 text-center ${
-                        isCenter ? "brightness-100" : "brightness-90"
-                      }`}
+                      className={`w-full h-full rounded-[32px] shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/10 bg-[linear-gradient(180deg,#151515_0%,#090909_100%)] flex flex-col items-center justify-center px-6 text-center ${isCenter ? "brightness-100" : "brightness-90"
+                        }`}
                     >
                       <p className="text-lg font-bold tracking-[0.25em] uppercase">
                         Default Wallpaper
@@ -263,12 +258,9 @@ export default function ChatWallpaper() {
 
         {/* Activate Button */}
         <div className="px-5 pb-8 pt-4">
-          <button
-            onClick={handleActivate}
-            className="w-full h-[56px] rounded-lg text-white font-bold text-lg transition-all active:scale-95 bg-[#1E1E1E] hover:bg-[#2A2A2A] border border-[#333]"
-          >
+          <Button variant="opacitysecondary" className="w-full" onClick={handleActivate}>
             Activate
-          </button>
+          </Button>
         </div>
       </div>
 

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import Button from "../../components/ui/Button";
 
 const promos = [
   "Sign Up Bonus",
@@ -16,6 +17,8 @@ const promos = [
 export default function Promo() {
   const navigate = useNavigate();
 
+
+
   return (
     <div className="min-h-dvh flex flex-col text-white relative overflow-hidden">
       <div className="flex-1 flex flex-col px-5 pt-4 pb-6">
@@ -23,7 +26,7 @@ export default function Promo() {
         <div className="flex items-center mb-6">
           <button
             onClick={() => navigate(-1)}
-            className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+            className="h-10 w-10 rounded-full flex items-center justify-center shrink-0 cursor-pointer"
             style={{ backgroundColor: "var(--button-color)" }}
           >
             <ChevronLeft size={24} />
@@ -36,14 +39,13 @@ export default function Promo() {
         {/* Promo List */}
         <div className="flex flex-col gap-3">
           {promos.map((promo) => (
-            <button
+            <Button
               key={promo}
-              className="w-full py-4 text-center font-semibold text-white transition hover:opacity-80"
-              style={{ backgroundColor: "var(--card-color)" }}
-              onClick={() => {}}
-            >
+              onClick={() => { }}
+              variant="opacitysecondary"
+              className="w-full">
               {promo}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

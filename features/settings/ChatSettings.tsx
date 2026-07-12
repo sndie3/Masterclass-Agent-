@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import Button from "../../components/ui/Button";
 
 interface ToggleProps {
   title: string;
@@ -10,7 +11,13 @@ interface ToggleProps {
   onToggle: () => void;
 }
 
-const Toggle = ({ checked, onChange }: { checked: boolean; onChange: () => void }) => {
+const Toggle = ({
+  checked,
+  onChange,
+}: {
+  checked: boolean;
+  onChange: () => void;
+}) => {
   return (
     <button
       onClick={onChange}
@@ -29,7 +36,10 @@ const Toggle = ({ checked, onChange }: { checked: boolean; onChange: () => void 
 
 function ToggleRow({ title, subtitle, enabled, onToggle }: ToggleProps) {
   return (
-    <div className="flex items-center justify-between px-4 py-4 mb-2" style={{ backgroundColor: "var(--card-color)" }}>
+    <div
+      className="flex items-center justify-between px-4 py-4 mb-2"
+      style={{ backgroundColor: "var(--card-color)" }}
+    >
       <div className="flex flex-col pr-4">
         <span className="text-sm font-medium text-white">{title}</span>
         <span className="text-xs italic text-gray-400 mt-1">{subtitle}</span>
@@ -80,33 +90,35 @@ export default function ChatSettings() {
           >
             <ChevronLeft size={24} />
           </button>
-          <h1 className="text-lg font-bold flex-1 text-center pr-10 uppercase">Chat Settings</h1>
+          <h1 className="text-lg font-bold flex-1 text-center pr-10 uppercase">
+            Chat Settings
+          </h1>
         </div>
 
         {/* Main Options */}
         <div className="mb-6">
           <div className="flex flex-col gap-2">
-            <button
+            <Button
               onClick={() => handleNavigate("/chat-wallpaper")}
-              className="w-full flex items-center justify-center py-4 text-sm font-medium uppercase hover:opacity-90 transition"
-              style={{ backgroundColor: "var(--card-color)" }}
+              variant="opacitysecondary"
+              className="w-full"
             >
               Chat Wallpaper
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => handleNavigate("/change-chat-name")}
-              className="w-full flex items-center justify-center py-4 text-sm font-medium uppercase hover:opacity-90 transition"
-              style={{ backgroundColor: "var(--card-color)" }}
+              variant="opacitysecondary"
+              className="w-full"
             >
               Change Chat Name
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => handleNavigate("/app-icon")}
-              className="w-full flex items-center justify-center py-4 text-sm font-medium uppercase hover:opacity-90 transition"
-              style={{ backgroundColor: "var(--card-color)" }}
+              variant="opacitysecondary"
+              className="w-full"
             >
               App Icon
-            </button>
+            </Button>
           </div>
         </div>
 

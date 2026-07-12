@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import CustomInput from "../../components/ui/InputBox";
+import { useModal } from "../../context/ModalContext";
+import Button from "../../components/ui/Button";
 
 const STORAGE_KEY = "chatName";
 
@@ -15,18 +18,25 @@ export default function ChangeChatName() {
   const navigate = useNavigate();
   const [currentChatName] = useState(() => getStoredChatName());
   const [newChatName, setNewChatName] = useState("");
-  const [message, setMessage] = useState("");
 
+  const { showModal } = useModal()
   const handleSubmit = () => {
     const trimmed = newChatName.trim();
     if (!trimmed) {
-      setMessage("Please enter a new chat name.");
+      showModal(
+        "success",
+        "Missing Chat Name",
+        "Please enter a new chat name."
+      );
       return;
     }
 
     localStorage.setItem(STORAGE_KEY, trimmed);
-    setMessage("Chat name updated successfully.");
-    setNewChatName("");
+    showModal(
+      "success",
+      "Chat Name Updated",
+      "The chat name has been changed successfully."
+    ); setNewChatName("");
   };
 
   return (
@@ -58,25 +68,21 @@ export default function ChangeChatName() {
 
         {/* New Chat Name Input */}
         <div className="flex flex-col gap-6">
-          <input
-            type="text"
-            placeholder="New Chat Name"
+
+          <CustomInput
+            type='text'
             value={newChatName}
             onChange={(e) => setNewChatName(e.target.value)}
-            className="w-full py-4 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 placeholder:italic tracking-[4px] outline-none focus:border-white"
+            custom-style='placeholder:italic placeholder:tracking-[5px] py-4'
+            placeholder="New Chat Name"
           />
-
-          <button
+          <Button
             onClick={handleSubmit}
-            className="w-full py-4 text-sm font-semibold uppercase transition hover:opacity-90"
-            style={{ backgroundColor: "var(--card-color)" }}
+            variant="opacitysecondary"
+            className="w-full"
           >
             Submit Change
-          </button>
-
-          {message && (
-            <p className="text-sm text-center text-gray-300">{message}</p>
-          )}
+          </Button>
         </div>
       </div>
 

@@ -2,6 +2,8 @@ import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, Camera } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import Button from "../../components/ui/Button";
+import { useModal } from "../../context/ModalContext";
 
 interface SubAccount {
   firstName: string;
@@ -35,12 +37,12 @@ export default function AddLevel() {
     password: "",
   });
 
-  const [message, setMessage] = useState("");
   const [photo, setPhoto] = useState<string | null>(null);
   const [showCamera, setShowCamera] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { showModal } = useModal()
 
   const startCamera = async () => {
     try {
@@ -54,7 +56,11 @@ export default function AddLevel() {
         videoRef.current.play();
       }
     } catch (err) {
-      setMessage("Could not access camera. Please allow camera permission.");
+      showModal(
+        "warning",
+        "Camera Access Denied",
+        "Could not access the camera. Please allow camera permission and try again."
+      );
       setShowCamera(false);
     }
   };
@@ -96,12 +102,19 @@ export default function AddLevel() {
 
   const handleActivate = () => {
     if (!canCreate) {
-      setMessage("Level 5 accounts cannot create sub-accounts.");
-      return;
+      showModal(
+        "warning",
+        "Action Not Allowed",
+        "Level 5 accounts cannot create sub-accounts."
+      ); return;
     }
 
     if (!form.firstName || !form.lastName || !form.mobileNumber || !form.password) {
-      setMessage("Please fill in all required fields.");
+      showModal(
+        "warning",
+        "Missing Required Fields",
+        "Please fill in all required fields."
+      );
       return;
     }
 
@@ -115,7 +128,11 @@ export default function AddLevel() {
     existing.push(newAccount);
     localStorage.setItem("subAccounts", JSON.stringify(existing));
 
-    setMessage(`Level ${childLevel} account created successfully.`);
+    showModal(
+      "success",
+      "Account Created",
+      `Level ${childLevel} account created successfully.`
+    ); 
     setForm({
       firstName: "",
       middleName: "",
@@ -134,7 +151,7 @@ export default function AddLevel() {
         <div className="flex items-center mb-4">
           <button
             onClick={() => navigate(-1)}
-            className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+            className="h-10 w-10 rounded-full flex items-center justify-center shrink-0 cursor-pointer"
             style={{ backgroundColor: "var(--button-color)" }}
           >
             <ChevronLeft size={24} />
@@ -252,19 +269,15 @@ export default function AddLevel() {
                 <span className="text-sm font-bold">{canCreate ? childLevel : "-"}</span>
               </div>
             </div>
-
-            <button
+            <Button
               onClick={handleActivate}
-              className="flex-1 py-3 font-semibold text-white transition hover:opacity-90"
-              style={{ backgroundColor: "var(--card-color)" }}
+              variant="opacitysecondary"
+              className="w-full"
             >
               Activate
-            </button>
+            </Button>
           </div>
 
-          {message && (
-            <p className="text-sm text-center mt-2 text-gray-300">{message}</p>
-          )}
 
           {!canCreate && (
             <p className="text-sm text-center text-red-400 mt-2">
