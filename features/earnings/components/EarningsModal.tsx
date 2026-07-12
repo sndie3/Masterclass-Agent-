@@ -19,7 +19,7 @@ export default function EarningModal({
     wallet,
     buttonText,
     onCancel,
-
+    onConfirm
 }: EarningModalProps) {
     const [animate, setAnimate] = useState(false);
 
@@ -38,7 +38,7 @@ export default function EarningModal({
             <div
                 className={`
           relative w-[90%] max-w-sm
-          border-[0.5px] border-white
+          border-[0.5px] border-[#333]
           bg-black p-6 shadow-xl
           transition-all duration-500 ease-out
           ${animate
@@ -66,7 +66,7 @@ export default function EarningModal({
                 <CustomInput type="tel" numbersOnly={true} decimal={true} placeholder="Input Amount" custom-style="placeholder:italic" />
 
                 <div className="py-5">
-                    <Button variant="secondary" className="w-full">
+                    <Button variant="secondary" className="w-full" onClick={onConfirm}>
                         {buttonText}
                     </Button>
                 </div>

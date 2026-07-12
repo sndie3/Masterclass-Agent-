@@ -71,7 +71,7 @@ function Earnings() {
                         </button>
                     </DashboardCard>
                     <DashboardCard title="Standard" walletData={123456}>
-                         <button onClick={() => setShowStandard(true)}>
+                        <button onClick={() => setShowStandard(true)}>
                             <CircleChevronLeft className='w-8 h-8' />
                         </button>
                     </DashboardCard>
@@ -87,13 +87,16 @@ function Earnings() {
                 wallet={1000}
                 onCancel={() => setShowSetSpecialty(false)}
                 buttonText="SUBMIT WITHDRAWAL"
+                onConfirm={() => setShowSetSpecialty(false)}
             />
-             <EarningModal
+            <EarningModal
                 open={showStandard}
                 type="Standard"
                 wallet={1000}
                 onCancel={() => setShowStandard(false)}
                 buttonText="SUBMIT WITHDRAWAL"
+                onConfirm={() => setShowStandard(false)}
+
             />
         </div>
     )
