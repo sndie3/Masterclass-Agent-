@@ -12,7 +12,7 @@ function CustomerSupport() {
     const [message, setMessage] = useState("");
     return (
         <div
-            className={`relative h-dvh text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
+            className={`relative text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
             style={chatWallpaperUrl ? {
                 backgroundImage: `url(${chatWallpaperUrl})`,
                 backgroundSize: 'cover',
@@ -48,22 +48,22 @@ function CustomerSupport() {
             </div>
             {/* Chat input - always at bottom */}
 
-            <div
-                className="shrink-0 flex items-center gap-2 p-3 border-t border-[#333]"
-                style={{ backgroundColor: "var(--button-color)" }}
-            >
-                <input
-                    autoFocus
-                    type="text"
-                    placeholder="Type a message..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="flex-1 bg-[#111] rounded-full px-4 py-3 outline-none"
-                />
-                <button className="px-5 py-3">
-                    <SendHorizonal />
-                </button>
-            </div>
+           <div
+    className="fixed bottom-0 left-0 right-0 z-50 flex items-center gap-2 p-3 border-t border-[#333]"
+    style={{ backgroundColor: "var(--button-color)" }}
+>
+    <input
+        autoFocus
+        type="text"
+        placeholder="Type a message..."
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        className="flex-1 bg-[#111] rounded-full px-4 py-3 outline-none"
+    />
+    <button className="px-5 py-3">
+        <SendHorizonal />
+    </button>
+</div>
 
         </div>
     )
