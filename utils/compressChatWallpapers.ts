@@ -6,7 +6,7 @@ import { compressImageFile, formatSize, listImageFiles } from './compressImage.t
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SOURCE_DIR = 'C:\\Users\\Owner\\Documents\\GitHub\\Mgame-Frontend\\public\\assets\\Chat images';
+const SOURCE_DIR = path.join(__dirname, '..', 'public', 'assets', 'Chat theme');
 const DEST_DIR = path.join(__dirname, '..', 'public', 'assets', 'chat-wallpapers');
 const WIDTH = 800;
 const QUALITY = 80;
@@ -28,7 +28,13 @@ async function main() {
       width: WIDTH,
       quality: QUALITY,
     });
-    console.log(`  ${formatSize(stats.originalSize)} -> ${formatSize(stats.compressedSize)} (${stats.reduction.toFixed(1)}% reduction)`);
+
+    if (stats.compressedSize > stats.originalSize) {
+      fs.copyFileSync(inputPath, outputPath);
+      console.log(`  Kept original ${formatSize(stats.originalSize)} (re-encoded was ${formatSize(stats.compressedSize)})`);
+    } else {
+      console.log(`  ${formatSize(stats.originalSize)} -> ${formatSize(stats.compressedSize)} (${stats.reduction.toFixed(1)}% reduction)`);
+    }
   }
 
   console.log('Done compressing chat wallpapers.');

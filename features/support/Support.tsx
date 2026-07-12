@@ -1,10 +1,14 @@
 import { ArrowLeft, SendHorizonal } from "lucide-react"
 import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useChatWallpaper } from "../../hooks/useChatWallpaper";
+import { chatWallpaperImages } from "../../utils/chatWallpaper";
 
 function Support() {
 
     const route = useNavigate()
+    const { chatWallpaper } = useChatWallpaper();
+    const chatWallpaperUrl = chatWallpaperImages[chatWallpaper];
     const [activeTab, setActiveTab] = useState("affiliates");
     const [selectedGame] = useState<{
         imageSrc: string;
@@ -16,11 +20,6 @@ function Support() {
     ];
     const [message, setMessage] = useState("");
     const [showGame] = useState(false);
-    const [chatWallpaper, setChatWallpaper] = useState("");
-
-    useEffect(() => {
-        setChatWallpaper(localStorage.getItem('chatWallpaper') || '');
-    }, []);
 
     return (
         <div className="relative min-h-screen overflow-hidden text-white flex flex-col font-bahnschrift bg-black">
@@ -60,10 +59,10 @@ function Support() {
                 transition-transform duration-700 ease-in-out
                 z-20
                 ${showGame ? "translate-y-full" : "translate-y-0"}
-                ${chatWallpaper ? "bg-black/60" : "bg-black"}
+                ${chatWallpaperUrl ? "bg-black/60" : "bg-black"}
             `}
-                style={chatWallpaper ? {
-                    backgroundImage: `url(${chatWallpaper})`,
+                style={chatWallpaperUrl ? {
+                    backgroundImage: `url(${chatWallpaperUrl})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',

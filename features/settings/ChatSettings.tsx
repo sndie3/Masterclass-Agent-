@@ -101,13 +101,6 @@ export default function ChatSettings() {
               Change Chat Name
             </button>
             <button
-              onClick={() => handleNavigate("/chat-list-view")}
-              className="w-full flex items-center justify-center py-4 text-sm font-medium uppercase hover:opacity-90 transition"
-              style={{ backgroundColor: "var(--card-color)" }}
-            >
-              Chat List View
-            </button>
-            <button
               onClick={() => handleNavigate("/app-icon")}
               className="w-full flex items-center justify-center py-4 text-sm font-medium uppercase hover:opacity-90 transition"
               style={{ backgroundColor: "var(--card-color)" }}

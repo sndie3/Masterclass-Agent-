@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "compress:themes": "tsx utils/compressThemeImages.ts",
+    "compress:chat-wallpapers": "tsx utils/compressChatWallpapers.ts",
     "compress:pwa-icons": "tsx utils/compressPwaIcons.ts"
   },
   "dependencies": {
