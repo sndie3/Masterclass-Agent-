@@ -19,6 +19,8 @@ import AppIcon from "../features/settings/AppIcon"
 import ProfileSecurity from "../features/settings/ProfileSecurity"
 import DeactivateAccount from "../features/settings/DeactivateAccount"
 import ShareReferral from "../features/profile/ShareRefferal"
+import SelfieWithID from "../features/profile/SelfieWithID"
+import ViewID from "../features/profile/ViewID"
 import Change from "../features/changepass/Change"
 import LinkPlayer from "../features/linkPlayer/LinkPlayer"
 import CustomerSupport from "../features/dashboard/CustomerSupport"
@@ -35,6 +37,8 @@ export default function AppRoutes() {
         <Route path="dashboard" element={<Home />} />
         <Route path="profile" element={<Profile />} />
         <Route path="profile/share-referral" element={<ShareReferral />} />
+        <Route path="selfie-with-id" element={<SelfieWithID />} />
+        <Route path="view-id" element={<ViewID />} />
         <Route path="theme" element={<Theme />} />
         <Route path="notifications" element={<Notifications />} />
         <Route path="support" element={<Support />} />

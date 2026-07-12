@@ -1,12 +1,17 @@
 import { ChevronLeft, Pencil } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const navigate = useNavigate();
 
+  const [hasSelfieWithID] = useState(() => {
+    return !!localStorage.getItem("selfieWithID");
+  });
+
   const menuItems = [
     { label: "Link player account" , link : "/link-player-account"},
-    { label: "Selfie with ID" , link : ""},
+    { label: hasSelfieWithID ? "View ID" : "Selfie with ID" , link : hasSelfieWithID ? "/view-id" : "/selfie-with-id"},
     { label: "Share Referral Code", link : "/profile/share-referral" },
   ];
 
