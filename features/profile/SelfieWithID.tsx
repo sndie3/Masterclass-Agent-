@@ -9,23 +9,31 @@ export default function SelfieWithID() {
   const navigate = useNavigate();
 
   const [photo, setPhoto] = useState<string | null>(null);
-  const [showCamera, setShowCamera] = useState(true);
+  const [showCamera, setShowCamera] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [cameraError, setCameraError] = useState(false);
   const [message, setMessage] = useState("");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
-    if (showCamera) {
-      startCamera();
-    }
+    startCamera();
     return () => stopCamera();
   }, []);
 
   const startCamera = async () => {
     setIsLoading(true);
+    setCameraError(false);
     setMessage("");
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      setCameraError(true);
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: { ideal: "user" } },
@@ -43,8 +51,8 @@ export default function SelfieWithID() {
       }
       setShowCamera(true);
     } catch {
-      setMessage("Could not access camera. Please allow camera permission and use a secure connection (HTTPS).");
-      setShowCamera(false);
+      setCameraError(true);
+      setMessage("Camera access failed. You can use your phone's camera below.");
     } finally {
       setIsLoading(false);
     }
@@ -74,9 +82,24 @@ export default function SelfieWithID() {
 
   const handleRetryCamera = () => {
     setPhoto(null);
-    setShowCamera(true);
+    setCameraError(false);
     setMessage("");
     startCamera();
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const result = event.target?.result as string;
+      if (result) {
+        localStorage.setItem(STORAGE_KEY, result);
+        navigate(-1);
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -133,8 +156,12 @@ export default function SelfieWithID() {
           )}
 
           {!isLoading && !showCamera && !photo && (
-            <div className="w-full max-w-sm aspect-[3/4] bg-black border border-white/20 flex items-center justify-center">
-              <p className="text-sm text-gray-400">No camera access</p>
+            <div className="w-full max-w-sm aspect-[3/4] bg-black border border-white/20 flex items-center justify-center px-4">
+              <p className="text-sm text-gray-400 text-center">
+                {cameraError
+                  ? "Phone camera preview is not available. Use the button below to take a photo."
+                  : "No camera access"}
+              </p>
             </div>
           )}
 
@@ -156,16 +183,41 @@ export default function SelfieWithID() {
           ) : showCamera ? (
             <button
               onClick={handleCapture}
-              className="w-full py-4 text-sm font-semibold uppercase transition hover:opacity-90 flex items-center justify-center gap-2"
+              className="w-full py-4 text-sm font-semibold uppercase flex items-center justify-center gap-2"
               style={{ backgroundColor: "var(--card-color)" }}
             >
               <Camera size={20} />
               Capture
             </button>
+          ) : cameraError ? (
+            <>
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full py-4 text-sm font-semibold uppercase"
+                style={{ backgroundColor: "var(--card-color)" }}
+              >
+                Take Photo with Phone Camera
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                capture="user"
+                className="hidden"
+                onChange={handleFileChange}
+              />
+              <button
+                onClick={handleRetryCamera}
+                className="w-full py-4 text-sm font-semibold uppercase"
+                style={{ backgroundColor: "var(--button-color)" }}
+              >
+                Retry Live Camera
+              </button>
+            </>
           ) : (
             <button
               onClick={handleRetryCamera}
-              className="w-full py-4 text-sm font-semibold uppercase transition hover:opacity-90"
+              className="w-full py-4 text-sm font-semibold uppercase"
               style={{ backgroundColor: "var(--button-color)" }}
             >
               Retry Camera
