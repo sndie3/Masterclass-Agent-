@@ -91,7 +91,7 @@ function Home() {
 
 
   return (
-    <div className="relative min-h-screen text-white overflow-hidden bg-black">
+    <div className="relative min-h-screen text-white overflow-hidden ">
       <Sidebar
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -159,7 +159,7 @@ function Home() {
       <div
         className={` fixed bottom-0 left-0 right-0 z-30
         rounded-t-3xl
-        bg-[var(--card-color)]
+        bg-(--card-color)
         transition-all duration-500
         ${collapsed ? "h-14" : "h-[430px]"}`}
       >
@@ -196,7 +196,7 @@ function Home() {
             <button
               key={item.title}
               onClick={() => navigate(item.route)}
-              className="w-full px-6 py-4 flex items-center hover:bg-[var(--hover-c olor)] transition gap-2"
+              className=" cursor-pointer w-full px-6 py-4 flex items-center hover:bg-[var(--hover-color)] transition gap-2"
             >
               <div className="flex items-center gap-10 flex-1">
                 <img src={item.icon} alt={item.title}

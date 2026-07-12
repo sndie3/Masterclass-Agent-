@@ -37,12 +37,12 @@ export function applyTheme(theme: Theme) {
   // Theme 1 is dark theme (no background image)
   if (theme === '1') {
     body.style.backgroundImage = 'none';
-    body.style.backgroundColor = '#0A0A0A';
+    body.style.backgroundColor = '#000000';
 
     // Set CSS variables for dark theme (solid colors, no transparency needed)
     root.style.setProperty('--primary-color', '#0054A6');
     root.style.setProperty('--secondary-color', '#FFD700');
-    root.style.setProperty('--background-color', '#0A0A0A');
+    root.style.setProperty('--background-color', '#000000');
     root.style.setProperty('--card-color', '#121212');
     root.style.setProperty('--button-color', '#1A1A1A');
     root.style.setProperty('--hover-color', '#181818');
@@ -61,7 +61,7 @@ export function applyTheme(theme: Theme) {
     // but cards, buttons, and inputs are solid dark so content remains readable.
     root.style.setProperty('--primary-color', '#0054A6');
     root.style.setProperty('--secondary-color', '#FFD700');
-    root.style.setProperty('--background-color', 'rgba(0, 0, 0, 0.35)');
+    root.style.setProperty('--background-color', 'rgba(0, 0, 0, 0)');
     root.style.setProperty('--card-color', '#121212');
     root.style.setProperty('--button-color', '#1A1A1A');
     root.style.setProperty('--hover-color', 'rgba(255, 255, 255, 0.12)');

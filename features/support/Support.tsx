@@ -1,4 +1,4 @@
-import { ArrowLeft, SendHorizonal } from "lucide-react"
+import { ChevronLeft, SendHorizonal } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useChatWallpaper } from "../../hooks/useChatWallpaper";
@@ -6,7 +6,7 @@ import { chatWallpaperImages } from "../../utils/chatWallpaper";
 
 function Support() {
 
-    const route = useNavigate()
+    const navigate = useNavigate()
     const { chatWallpaper } = useChatWallpaper();
     const chatWallpaperUrl = chatWallpaperImages[chatWallpaper];
     const [activeTab, setActiveTab] = useState("affiliates");
@@ -22,19 +22,18 @@ function Support() {
     const [showGame] = useState(false);
 
     return (
-        <div className="relative min-h-screen overflow-hidden text-white flex flex-col font-bahnschrift bg-black">
-            <div className="rounded-t-[32px] px-3 pt-6 pb-2 relative z-30" style={{ backgroundColor: 'var(--background-color)' }}>
-                <div className="flex items-center mb-5 justify-between">
-                    <button
-                        onClick={() => { route('/dashboard') }}
-                        className="cursor-pointer h-12 w-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--button-color)' }}
-                    >
-                        <ArrowLeft size={20} className="text-white" />
-                    </button>
-                    <h1 className="text-[24px] font-semibold ">Support</h1>
-                    <div>
-                        <img src="/assets/icons/invite.png" alt="icon" className="w-7 h-7" />
-                    </div>
+        <div className="relative min-h-screen overflow-hidden text-white flex flex-col font-bahnschrift ">
+            <div className="flex items-center mb-4 px-5 pt-4 pb-6 z-30">
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--button-color)" }}
+                >
+                    <ChevronLeft size={24} />
+                </button>
+                <h1 className="text-xl font-bold flex-1 text-center pr-6"> Support</h1>
+                <div>
+                    <img src="/assets/icons/invite.png" alt="icon" className="w-7 h-7" />
                 </div>
             </div>
             {/* <button
@@ -54,7 +53,7 @@ function Support() {
             </button> */}
             <div
                 className={`
-                absolute inset-0 pt-[110px]
+                absolute inset-0 pt-[70px]
                 flex flex-col
                 transition-transform duration-700 ease-in-out
                 z-20

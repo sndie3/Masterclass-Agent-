@@ -1,11 +1,11 @@
-import { ArrowLeft, CircleChevronLeft } from "lucide-react"
+import { ChevronLeft, CircleChevronLeft } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import LogsTable from "../../components/common/LogsTable";
 import DashboardCard from "../dashboard/components/DashboardCard";
 
 function Earnings() {
 
-    const route = useNavigate()
+    const navigate = useNavigate()
     const logs = [
         {
             uid: "PID-ROGER-000053-2026",
@@ -41,20 +41,17 @@ function Earnings() {
     ];
     return (
         <div className="relative min-h-screen overflow-hidden text-white flex flex-col ">
-            <div className="rounded-t-[32px] px-3 pt-6 pb-2 relative z-30" style={{ backgroundColor: 'var(--background-color)' }}>
-                <div className="flex items-center mb-5 justify-between font-bahnschrift">
-                    <button
-                        onClick={() => { route('/dashboard') }}
-                        className="cursor-pointer h-12 w-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--button-color)' }}
-                    >
-                        <ArrowLeft size={20} className="text-white" />
-                    </button>
-                    <h1 className="text-[24px] font-semibold ">Earnings</h1>
-                    <p />
-                </div>
+            <div className="flex items-center mb-4 px-5 pt-4 pb-6">
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--button-color)" }}
+                >
+                    <ChevronLeft size={24} />
+                </button>
+                <h1 className="text-xl font-bold flex-1 text-center pr-10">Earnings</h1>
             </div>
-
-            <div className="flex-1 mt-3 overflow-y-auto px-3">
+            <div className="flex-1 mt-3 overflow-y-auto px-3 ">
                 <p className="flex text-justify text-gray-400 text-sm">
                     Earnings are real-time and cut-off transactions. You can withdraw anytime only to real-time earnings on the next day and cut-off transactions are withdrawable on the 16th and every 1st day of the month.
                 </p>

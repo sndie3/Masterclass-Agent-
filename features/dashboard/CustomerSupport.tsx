@@ -1,26 +1,24 @@
-import { ArrowLeft, SendHorizonal } from "lucide-react"
+import { ChevronLeft, SendHorizonal } from "lucide-react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 
 function CustomerSupport() {
 
-    const route = useNavigate()
+    const navigate = useNavigate()
     const [message, setMessage] = useState("");
     return (
         <div className="relative min-h-screen overflow-hidden text-white flex flex-col ">
-            <div className="rounded-t-[32px] px-3 pt-3 pb-2 relative z-30 bg-black">
-                <div className="flex items-center mb-5 justify-between font-bahnschrift">
-                    <button
-                        onClick={() => { route('/dashboard') }}
-                        className="cursor-pointer h-12 w-12 rounded-full flex items-center justify-center" style={{ backgroundColor: 'var(--button-color)' }}
-                    >
-                        <ArrowLeft size={20} className="text-white" />
-                    </button>
-                    <h1 className="text-[24px] font-semibold ">Customer Support</h1>
-                    <p />
-                </div>
+            <div className="flex items-center mb-4 px-5 pt-4 pb-6">
+                <button
+                    onClick={() => navigate('/dashboard')}
+                    className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--button-color)" }}
+                >
+                    <ChevronLeft size={24} />
+                </button>
+                <h1 className="text-xl font-bold flex-1 text-center pr-10">Customer Support</h1>
             </div>
-            <div className="flex flex-col h-full bg-black">
+            <div className="flex flex-col h-full">
                 {/* Chat list */}
                 <div className="flex-1 overflow-y-auto p-4 font-bahnschrift">
                     <div className="flex justify-start">
