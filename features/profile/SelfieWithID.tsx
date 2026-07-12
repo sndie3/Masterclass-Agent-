@@ -28,17 +28,22 @@ export default function SelfieWithID() {
     setMessage("");
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: "user" },
+        video: { facingMode: { ideal: "user" } },
         audio: false,
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
+      const video = videoRef.current;
+      if (video) {
+        video.srcObject = stream;
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute("playsinline", "true");
+        video.setAttribute("webkit-playsinline", "true");
+        await video.play();
       }
       setShowCamera(true);
     } catch {
-      setMessage("Could not access camera. Please allow camera permission.");
+      setMessage("Could not access camera. Please allow camera permission and use a secure connection (HTTPS).");
       setShowCamera(false);
     } finally {
       setIsLoading(false);
