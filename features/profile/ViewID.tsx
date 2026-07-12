@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Trash2 } from "lucide-react";
 import Footer from "../../components/common/Footer";
 
 const STORAGE_KEY = "selfieWithID";
@@ -8,11 +8,15 @@ const STORAGE_KEY = "selfieWithID";
 export default function ViewID() {
   const navigate = useNavigate();
   const [photo, setPhoto] = useState<string | null>(null);
-  const [canRetake] = useState(false);
 
   useEffect(() => {
     setPhoto(localStorage.getItem(STORAGE_KEY));
   }, []);
+
+  const handleDelete = () => {
+    localStorage.removeItem(STORAGE_KEY);
+    setPhoto(null);
+  };
 
   return (
     <div className="min-h-dvh flex flex-col text-white relative overflow-hidden">
@@ -52,18 +56,22 @@ export default function ViewID() {
         {/* Actions */}
         <div className="flex flex-col gap-3 mt-6">
           {photo ? (
-            <button
-              disabled={!canRetake}
-              onClick={() => canRetake && navigate("/selfie-with-id")}
-              className={`w-full py-4 text-sm font-semibold uppercase transition ${
-                canRetake
-                  ? "hover:opacity-90 cursor-pointer"
-                  : "opacity-50 cursor-not-allowed"
-              }`}
-              style={{ backgroundColor: canRetake ? "var(--card-color)" : "#333" }}
-            >
-              Retake
-            </button>
+            <>
+              <button
+                onClick={() => navigate("/selfie-with-id")}
+                className="w-full py-4 text-sm font-semibold uppercase transition hover:opacity-90"
+                style={{ backgroundColor: "var(--card-color)" }}
+              >
+                Retake
+              </button>
+              <button
+                onClick={handleDelete}
+                className="w-full py-4 text-sm font-semibold uppercase transition hover:opacity-90 flex items-center justify-center gap-2 bg-red-600"
+              >
+                <Trash2 size={18} />
+                Delete
+              </button>
+            </>
           ) : (
             <button
               onClick={() => navigate("/selfie-with-id")}

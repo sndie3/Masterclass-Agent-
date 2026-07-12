@@ -47,16 +47,10 @@ export default function Profile() {
           <button
             key={item.label}
             onClick={() => navigate(item.link)}
-            className="w-full py-4 rounded-lg text-sm font-semibold text-center transition"
+            className="w-full py-4 rounded-lg text-sm font-semibold text-center"
             style={{
               backgroundColor: "var(--card-color)",
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "var(--hover-color)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "var(--card-color)")
-            }
           >
             {item.label}
           </button>
@@ -85,28 +79,16 @@ export default function Profile() {
         </div>
 
         <button
-          className="w-full py-4 rounded-lg text-sm font-semibold text-center transition"
+          className="w-full py-4 rounded-lg text-sm font-semibold text-center"
           style={{ backgroundColor: "var(--card-color)" }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--hover-color)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--card-color)")
-          }
           onClick={() => navigate("/theme")}
         >
           Theme
         </button>
 
         <button
-          className="w-full py-4 rounded-lg text-sm font-semibold text-center transition"
+          className="w-full py-4 rounded-lg text-sm font-semibold text-center"
           style={{ backgroundColor: "var(--card-color)" }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--hover-color)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = "var(--card-color)")
-          }
           onClick={() => navigate("/change-password")}
         >
           Change Password
