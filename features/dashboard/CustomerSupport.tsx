@@ -1,5 +1,5 @@
 import { ChevronLeft, SendHorizonal } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useChatWallpaper } from "../../hooks/useChatWallpaper";
 import { chatWallpaperImages } from "../../utils/chatWallpaper";
@@ -14,7 +14,7 @@ function CustomerSupport() {
     const chatWallpaperUrl = chatWallpaperImages[chatWallpaper];
 
     const [message, setMessage] = useState("");
-
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [messages, setMessages] = useState<Message[]>([
         {
             sender: "support",
@@ -36,6 +36,12 @@ function CustomerSupport() {
 
         setMessage("");
     };
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({
+            behavior: "smooth",
+        });
+    }, [messages]);
 
     return (
         <div
@@ -69,34 +75,37 @@ function CustomerSupport() {
             <div className="flex flex-col flex-1 overflow-hidden">
                 {/* Messages */}
                 <div className="flex-1 overflow-y-auto p-4 font-bahnschrift">
-                    <div className="space-y-3">
-                        {messages.map((msg, index) => (
-                            <div
-                                key={index}
-                                className={`flex ${msg.sender === "user"
-                                        ? "justify-end"
-                                        : "justify-start"
-                                    }`}
-                            >
+                    <div className="min-h-full flex flex-col justify-end">
+                        <div className="space-y-3">
+                            {messages.map((msg, index) => (
                                 <div
-                                    className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-sm ${msg.sender === "user"
-                                            ? "bg-blue-600 rounded-br-md"
-                                            : "bg-[#1A1A1A] rounded-bl-md"
+                                    key={index}
+                                    className={`flex ${msg.sender === "user"
+                                            ? "justify-end"
+                                            : "justify-start"
                                         }`}
                                 >
-                                    <p>{msg.text}</p>
+                                    <div
+                                        className={`max-w-[80%] rounded-2xl px-4 py-3 shadow-sm ${msg.sender === "user"
+                                                ? "bg-blue-600 rounded-br-md"
+                                                : "bg-[#1A1A1A] rounded-bl-md"
+                                            }`}
+                                    >
+                                        <p>{msg.text}</p>
 
-                                    {msg.sender === "support" && (
-                                        <p className="mt-1 text-xs text-gray-400">
-                                            {msg.subtext}
-                                        </p>
-                                    )}
+                                        {msg.sender === "support" && (
+                                            <p className="mt-1 text-xs text-gray-400">
+                                                {msg.subtext}
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+
+                            <div ref={messagesEndRef} />
+                        </div>
                     </div>
                 </div>
-
                 {/* Input */}
                 <div
                     className="shrink-0 flex items-center gap-2 p-3 border-t border-[#333]"
