@@ -136,9 +136,9 @@ function Home() {
             <CircleChevronLeft className='w-8 h-8' />
           </DashboardCard>
           {/* Online Players count */}
-          <DashboardCard title="Online" walletData={1203}/>
+          <DashboardCard title="Online" walletData={1203} />
           {/* Offline Players count */}
-          <DashboardCard title="Offline" walletData={500}/>
+          <DashboardCard title="Offline" walletData={500} />
         </div>
         <p className='py-5 text-gray-400 '>Wallet: </p>
         <div className="grid grid-cols-2 gap-4 text-gray-400">
@@ -164,13 +164,14 @@ function Home() {
         ${collapsed ? "h-14" : "h-[430px]"}`}
       >
         {/* Search */}
-        <div className="border-b border-white/10 flex items-center px-4 h-14">
-          <Search size={18} className="text-gray-500" />
-
-          <input
-            placeholder="Tell me anything"
-            className="flex-1 bg-transparent px-3 outline-none placeholder:text-gray-500"
-          />
+        <div className="border-b border-white/10 flex items-center px-4 h-14 justify-between">
+          <button
+            className="flex items-center gap-2 w-full text-left text-sm text-gray-500 cursor-pointer"
+            onClick={() => navigate("/customer-support")}
+          >
+            <Search size={18} className="shrink-0" />
+            <span>Tell me anything</span>
+          </button>
           <button
             onClick={() => setCollapsed(!collapsed)}
             className="flex h-9 w-9 items-center justify-center rounded-full hover:opacity-80"
