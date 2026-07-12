@@ -9,6 +9,7 @@ export default function Register() {
 
   const [form, setForm] = useState({
     firstName: "",
+    middleName: "",
     lastName: "",
     mobileNumber: "",
     birthMonth: "",
@@ -111,10 +112,11 @@ export default function Register() {
     showModal(
       "success",
       "Registration Successful",
-      "Your account has been registered successfully."
-    ); 
+      "Account registered successfully."
+    );
     setForm({
       firstName: "",
+      middleName: "",
       lastName: "",
       mobileNumber: "",
       birthMonth: "",
@@ -142,9 +144,10 @@ export default function Register() {
 
         {/* Disclaimer */}
         <div className="text-xs text-gray-400 mb-4 text-justify">
-          Make sure that all information are true and correct. Any false information
-          will forfeit player privilege and automatically terminate or block player
-          account use and access. Privacy Policy and Terms of Use will apply.
+          Please make sure all the information you provide is true and accurate.
+          Providing false or misleading information, including submitting another person's identity or identification documents,
+          may result in the loss of player privileges and the suspension, termination, or permanent blocking of your account.
+          By continuing, you agree to MGame.ph's Privacy Policy and Terms of Use.
         </div>
 
         {/* Form */}
@@ -154,6 +157,13 @@ export default function Register() {
             placeholder="First Name"
             value={form.firstName}
             onChange={(e) => handleChange("firstName", e.target.value)}
+            className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
+          />
+          <input
+            type="text"
+            placeholder="Middle Name"
+            value={form.middleName}
+            onChange={(e) => handleChange("middleName", e.target.value)}
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
           />
           <input
@@ -237,17 +247,17 @@ export default function Register() {
 
                 <div className="flex items-center justify-center gap-4 px-6 py-5">
                   <button
+                    onClick={handleCloseCamera}
+                    className="flex-1 py-3 rounded-lg font-semibold text-white text-sm bg-red-600 hover:bg-red-700"
+                  >
+                    Cancel
+                  </button>
+                  <button
                     onClick={handleCapture}
                     className="flex-1 py-3 rounded-lg font-semibold text-white text-sm"
                     style={{ backgroundColor: "var(--card-color)" }}
                   >
                     Capture
-                  </button>
-                  <button
-                    onClick={handleCloseCamera}
-                    className="flex-1 py-3 rounded-lg font-semibold text-white text-sm bg-red-600 hover:bg-red-700"
-                  >
-                    Cancel
                   </button>
                 </div>
               </div>

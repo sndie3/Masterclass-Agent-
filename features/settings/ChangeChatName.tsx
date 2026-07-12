@@ -35,7 +35,7 @@ export default function ChangeChatName() {
     showModal(
       "success",
       "Chat Name Updated",
-      "The chat name has been changed successfully."
+      "Your chat name has been changed successfully."
     ); setNewChatName("");
   };
 

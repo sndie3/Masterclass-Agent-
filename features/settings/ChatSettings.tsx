@@ -21,14 +21,12 @@ const Toggle = ({
   return (
     <button
       onClick={onChange}
-      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors duration-300 focus:outline-none ${
-        checked ? "bg-blue-600" : "bg-gray-300"
-      }`}
+      className={`relative h-6 w-11 shrink-0 rounded-full transition-colors duration-300 focus:outline-none ${checked ? "bg-blue-600" : "bg-gray-300"
+        }`}
     >
       <span
-        className={`absolute top-1 left-1 h-4 w-4 rounded-full bg-white transition-transform duration-300 ${
-          checked ? "translate-x-5" : "translate-x-0"
-        }`}
+        className={`absolute top-1 left-1 h-4 w-4 rounded-full bg-white transition-transform duration-300 ${checked ? "translate-x-5" : "translate-x-0"
+          }`}
       />
     </button>
   );
@@ -99,18 +97,18 @@ export default function ChatSettings() {
         <div className="mb-6">
           <div className="flex flex-col gap-2">
             <Button
-              onClick={() => handleNavigate("/chat-wallpaper")}
-              variant="opacitysecondary"
-              className="w-full"
-            >
-              Chat Wallpaper
-            </Button>
-            <Button
               onClick={() => handleNavigate("/change-chat-name")}
               variant="opacitysecondary"
               className="w-full"
             >
               Change Chat Name
+            </Button>
+            <Button
+              onClick={() => handleNavigate("/chat-wallpaper")}
+              variant="opacitysecondary"
+              className="w-full"
+            >
+              Chat Wallpaper
             </Button>
             <Button
               onClick={() => handleNavigate("/app-icon")}

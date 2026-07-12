@@ -28,7 +28,7 @@ export default function DeactivateAccount() {
     showModal(
       "success",
       "Account Deactivated",
-      "Your account has been deactivated successfully."
+      "Your account is now deactivated."
     );
     setReason("");
 

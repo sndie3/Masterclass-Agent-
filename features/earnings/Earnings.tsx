@@ -59,7 +59,7 @@ function Earnings() {
             </div>
             <div className="flex-1 mt-3 overflow-y-auto px-3 ">
                 <p className="flex text-justify text-gray-400 text-sm">
-                    Earnings are real-time and cut-off transactions. You can withdraw anytime only to real-time earnings on the next day and cut-off transactions are withdrawable on the 16th and every 1st day of the month.
+                    Real-Time Earnings are available for withdrawal the next day. Cut-Off Earnings can be withdrawn on the 1st and 16th of each month.
                 </p>
                 <br />
                 <p className="text-gray-400 text-sm">PLAY RESPONSIBLY.</p>

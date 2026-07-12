@@ -131,7 +131,7 @@ export default function SelfieWithID() {
 
         {/* Instructions */}
         <p className="text-sm text-gray-400 text-center mb-6">
-          Hold your ID next to your face and make sure both are clearly visible.
+          Hold your ID beside your face. Make sure both your face and ID are clearly visible.
         </p>
 
         {/* Camera / Preview */}

@@ -44,7 +44,7 @@ export default function LinkPlayerCard() {
                     : "Missing Password";
 
             const message = !mobileNumber && !password
-                ? "Please enter your mobile number and password."
+                ? "Please enter your mobile number and password to continue."
                 : !mobileNumber
                     ? "Please enter your mobile number."
                     : "Please enter your password.";

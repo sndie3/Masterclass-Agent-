@@ -42,7 +42,7 @@ function Home() {
     },
     {
       icon: "/assets/icons/ribbon.png",
-      title: "Promo",
+      title: "Promos",
       count: "12",
       route: "/promo"
 

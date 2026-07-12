@@ -107,7 +107,7 @@ export default function Notifications() {
 
         {/* Subtitle */}
         <p className="text-sm text-gray-400 mb-6">
-          Choose which notifications you would like to receive.
+          Manage your notification preferences.
         </p>
 
         {/* Sections */}

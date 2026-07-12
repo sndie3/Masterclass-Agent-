@@ -101,7 +101,7 @@ export default function Reset() {
 
           {/* Disclaimer */}
           <div className="text-md text-gray-400 mb-6 text-left leading-relaxed">
-            Make sure that the number is correct and order and also a pin will be send to your email account for a 2 way verification process.
+            Please make sure your mobile number is correct and active. A One-Time Password (OTP) will be sent to your mobile number to verify your account.
           </div>
 
           {/* Reset Form */}

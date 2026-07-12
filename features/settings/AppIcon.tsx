@@ -38,8 +38,8 @@ export default function AppIcon() {
     applyAppIcon(DEFAULT_ICON);
      showModal(
         "success",
-        "App Icon Reset",
-        "Your app icon has been restored to the default."
+        "App Icon Updated",
+        "Your app icon has been changed successfully."
       );
   };
 

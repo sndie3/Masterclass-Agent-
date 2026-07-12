@@ -47,7 +47,7 @@ export default function ViewID() {
             </div>
           ) : (
             <p className="text-gray-400 text-center">
-              No selfie with ID on record.
+              No selfie with your ID has been uploaded.
             </p>
           )}
 

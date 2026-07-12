@@ -10,7 +10,9 @@ interface SubAccount {
   middleName: string;
   lastName: string;
   mobileNumber: string;
-  birthdate: string;
+  birthMonth: string,
+  birthDay: string,
+  birthYear: string,
   password: string;
   level: number;
   photo: string | null;
@@ -33,7 +35,9 @@ export default function AddLevel() {
     middleName: "",
     lastName: "",
     mobileNumber: "",
-    birthdate: "",
+    birthMonth: "",
+    birthDay: "",
+    birthYear: "",
     password: "",
   });
 
@@ -132,13 +136,15 @@ export default function AddLevel() {
       "success",
       "Account Created",
       `Level ${childLevel} account created successfully.`
-    ); 
+    );
     setForm({
       firstName: "",
       middleName: "",
       lastName: "",
       mobileNumber: "",
-      birthdate: "",
+      birthMonth: "",
+      birthDay: "",
+      birthYear: "",
       password: "",
     });
     setPhoto(null);
@@ -163,9 +169,10 @@ export default function AddLevel() {
 
         {/* Disclaimer */}
         <div className="text-xs text-gray-400 mb-4 text-center">
-          Make sure that all information are true and correct. Any false information
-          will forfeit player privilege and automatically terminate or block player
-          account use and access. Privacy Policy and Terms of Use will apply.
+          Please make sure all the information you provide is true and accurate.
+          Providing false or misleading information, including submitting another person's identity or identification documents,
+          may result in the loss of player privileges and the suspension, termination, or permanent blocking of your account.
+          By continuing, you agree to MGame.ph's Privacy Policy and Terms of Use.
         </div>
 
         {/* Form */}
@@ -198,15 +205,40 @@ export default function AddLevel() {
             onChange={(e) => handleChange("mobileNumber", e.target.value)}
             className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
           />
-          <input
-            type="text"
-            placeholder="Birthdate"
-            value={form.birthdate}
-            onChange={(e) => handleChange("birthdate", e.target.value)}
-            onFocus={(e) => (e.target.type = "date")}
-            onBlur={(e) => (e.target.type = "text")}
-            className="w-full py-3 px-4 bg-transparent border border-white/30 text-center text-sm text-white placeholder-gray-500 outline-none focus:border-white"
-          />
+          <div className="grid grid-cols-3 gap-2 md:gap-3">
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="MM"
+              maxLength={2}
+              value={form.birthDay}
+              onChange={(e) => handleChange("birthDay", e.target.value)}
+              className="w-full bg-transparent border border-white/30 rounded px-4 py-2 text-center text-white placeholder:text-[#666] focus:outline-none focus:border-white transition-colors"
+              style={{ fontFamily: '"Calibri Light", Calibri, sans-serif', fontSize: 'clamp(14px, 1.5vw, 18px)' }}
+            />
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="DD"
+              maxLength={2}
+              value={form.birthMonth}
+              onChange={(e) => handleChange("birthMonth", e.target.value)}
+
+              className="w-full bg-transparent border border-white/30 rounded px-4 px-4 py-2 text-center text-white placeholder:text-[#666] focus:outline-none focus:border-white transition-colors"
+              style={{ fontFamily: '"Calibri Light", Calibri, sans-serif', fontSize: 'clamp(14px, 1.5vw, 18px)' }}
+            />
+            <input
+              type="text"
+              inputMode="numeric"
+              placeholder="YYYY"
+              maxLength={4}
+              value={form.birthYear}
+              onChange={(e) => handleChange("birthYear", e.target.value)}
+
+              className="w-full bg-transparent border border-white/30 rounded px-4 px-4 py-2text-center text-white placeholder:text-[#666] focus:outline-none focus:border-white transition-colors"
+              style={{ fontFamily: '"Calibri Light", Calibri, sans-serif', fontSize: 'clamp(14px, 1.5vw, 18px)' }}
+            />
+          </div>
           <input
             type="password"
             placeholder="Password 8 characters alphanumeric"
@@ -242,17 +274,17 @@ export default function AddLevel() {
 
                 <div className="flex items-center justify-center gap-4 px-6 py-5">
                   <button
+                    onClick={handleCloseCamera}
+                    className="flex-1 py-3 rounded-lg font-semibold text-white text-sm bg-red-600 hover:bg-red-700"
+                  >
+                    Cancel
+                  </button>
+                  <button
                     onClick={handleCapture}
                     className="flex-1 py-3 rounded-lg font-semibold text-white text-sm"
                     style={{ backgroundColor: "var(--card-color)" }}
                   >
                     Capture
-                  </button>
-                  <button
-                    onClick={handleCloseCamera}
-                    className="flex-1 py-3 rounded-lg font-semibold text-white text-sm bg-red-600 hover:bg-red-700"
-                  >
-                    Cancel
                   </button>
                 </div>
               </div>

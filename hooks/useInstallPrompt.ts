@@ -130,7 +130,7 @@ export function useInstallPrompt() {
           setIsInstalled(true);
           return { success: true, method: "native" };
         }
-        return { success: false, method: "native", message: "Installation was cancelled." };
+        return { success: false, method: "native", message: "The Installation was cancelled." };
       }
 
       setIsInstalling(false);

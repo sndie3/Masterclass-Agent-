@@ -29,8 +29,8 @@ function LoginCard() {
             let title;
 
             if (!username && !password) {
-                message = "Please enter your username and password.";
-                title = "Missing Required Fields";
+                message = "Please enter your username and password to continue.";
+                title = "Username and Password Required";
             } else if (!username) {
                 message = "Please enter your username.";
                 title = "Missing Username";
@@ -52,7 +52,7 @@ function LoginCard() {
             showModal(
                 "warning",
                 "Agreement Required",
-                "Please agree to Privacy Policy & Terms of Use"
+                "Please read and agree to the Privacy Policy and Terms of Use to continue."
             );
 
             return;
@@ -107,13 +107,12 @@ function LoginCard() {
                                 fontSize: "clamp(12px, 1.5vw, 16px)",
                             }}
                         >
-                            This site is for 21 years and above only, not allowed to any
-                            government official or employee connected with any government agency
-                            or armed forces, not allowed to any Gaming Employment License (GEL)
-                            holder, not allowed to any PAGCOR's National Database of Restricted
-                            Persons (NDRP), also that your funds or credits in my account may be
-                            forfeited if found ineligible, you are refrain from playing in
-                            public, and I agree to MGAME's{" "}
+                            By continuing, I confirm that I am 21 years old or above and eligible to use MGame.ph. 
+                            I am not a government official or employee, a member of the armed forces, 
+                            a Gaming Employment License (GEL) holder, or listed in PAGCOR's National Database of Restricted Persons (NDRP). 
+                            I understand that if I am found ineligible, my account, funds, and credits may be forfeited in accordance with applicable regulations.
+                            I agree to play responsibly, avoid playing in public places, and accept MGame.ph's
+                            {" "}
                             <span className="text-red-600 font-semibold">
                                 Privacy Policy
                             </span>{" "}
@@ -147,7 +146,7 @@ function LoginCard() {
 
                         <span className="text-xs">I agree to Masterclass <span className="text-red-600">Privacy Policy</span>   &amp;<span className="text-red-600"> Terms of Use.</span> </span>
                     </label>
-                    <Button 
+                    <Button
                         variant='secondary'
                         onClick={handleLogin}
                         className='mx-auto tracking-widest mt-5'>

@@ -10,7 +10,7 @@ export default function Profile() {
   });
 
   const menuItems = [
-    { label: "Link player account" , link : "/link-player-account"},
+    { label: "Link Player Account" , link : "/link-player-account"},
     { label: hasSelfieWithID ? "View ID" : "Selfie with ID" , link : hasSelfieWithID ? "/view-id" : "/selfie-with-id"},
     { label: "Share Referral Code", link : "/profile/share-referral" },
   ];

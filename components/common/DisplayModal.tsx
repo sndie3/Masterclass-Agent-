@@ -21,7 +21,7 @@ export default function DisplayModal({
     type = "info",
     title,
     message,
-    confirmText = "OKEY",
+    confirmText = "OK",
     cancelText,
     onConfirm,
     onCancel,

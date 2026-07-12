@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
-
+import { useModal } from "../../context/ModalContext"
 export default function Change() {
   const navigate = useNavigate();
 
@@ -11,39 +11,67 @@ export default function Change() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [generatedOtp, setGeneratedOtp] = useState("");
-  const [message, setMessage] = useState("");
-
+  const { showModal } = useModal()
   const handleReset = () => {
     if (!mobileNumber || mobileNumber.length !== 11) {
-      setMessage("Please enter your 11 digit mobile number.");
+      showModal(
+        "warning",
+        "Missing Mobile Number",
+        "Please enter your 11 digit mobile number."
+      );
       return;
     }
     if (!newPassword || !confirmPassword) {
-      setMessage("Please enter and confirm your new password.");
+      showModal(
+        "warning",
+        "Missing Password",
+        "Please enter and confirm your new password."
+      );
       return;
     }
     if (newPassword !== confirmPassword) {
-      setMessage("Passwords do not match.");
+      showModal(
+        "warning",
+        "Password Mismatch",
+        "Passwords do not match."
+      );
       return;
     }
 
     const generated = Math.floor(100000 + Math.random() * 900000).toString();
     setGeneratedOtp(generated);
-    setMessage(`OTP sent to your email: ${generated}`);
+    showModal(
+      "info",
+      "OTP Sent",
+      `A one-time password (OTP) has been sent to your registered email. ${generated}`
+    );
   };
 
   const handleSubmit = () => {
     if (!otp) {
-      setMessage("Please enter the 6 digit OTP.");
+      showModal(
+        "warning",
+        "Missing OTP",
+        "Please enter the 6 digit OTP."
+      );
       return;
     }
     if (otp !== generatedOtp) {
-      setMessage("Invalid OTP. Please try again.");
+      
+      showModal(
+        "warning",
+        "Invalid OTP",
+        "Please try again."
+      );
       return;
     }
 
     localStorage.setItem("resetPassword", newPassword);
-    setMessage("Password reset successfully.");
+    showModal(
+      "success",
+      "Password Reset Successfully",
+      "Your password has been reset successfully."
+    );
 
     setTimeout(() => {
       navigate("/login");
@@ -67,7 +95,7 @@ export default function Change() {
 
         {/* Disclaimer */}
         <div className="text-xs text-gray-400 mb-6 text-left leading-relaxed">
-          Make sure that the number is correct and order and also a pin will be send to your email account for a 2 way verification process.
+          Please make sure your mobile number is correct and active. A One-Time Password (OTP) will be sent to your mobile number to verify your account.
         </div>
 
         {/* Reset Form */}
@@ -130,9 +158,6 @@ export default function Change() {
           </div>
         </div>
 
-        {message && (
-          <p className="text-sm text-center mt-4 text-gray-300">{message}</p>
-        )}
 
         {/* Policies Link */}
         <div className="flex-1 flex items-end justify-center pb-6">
