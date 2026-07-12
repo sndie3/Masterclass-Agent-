@@ -5,7 +5,6 @@ import Button from "../../../components/ui/Button";
 interface EarningModalProps {
     open: boolean;
     type?: "Speciality" | "Standard";
-    message: string;
     confirmText?: string;
     cancelText?: string;
     onConfirm?: () => void;
@@ -40,7 +39,7 @@ export default function EarningModal({
                 className={`
           relative w-[90%] max-w-sm
           border-[0.5px] border-white
-          bg-[#1d1d1d] p-6 shadow-xl
+          bg-black p-6 shadow-xl
           transition-all duration-500 ease-out
           ${animate
                         ? "translate-x-0 opacity-100"
@@ -56,21 +55,21 @@ export default function EarningModal({
                 />
 
                 <div className="flex w-full flex-col items-center">
-
-
-                    <p className="mt-3 text-center text-xs text-gray-300">
+                    <p className="mt-3 text-center text-lg text-gray-300">
                         {type}
                     </p>
-                    <p className="mt-3 text-center text-xs text-gray-300">
-                        {wallet}
+                    <p className="my-3 text-center text-2xl text-gray-300">
+                        {(wallet).toLocaleString()}
                     </p>
                 </div>
 
                 <CustomInput type="tel" numbersOnly={true} decimal={true} placeholder="Input Amount" custom-style="placeholder:italic" />
 
-                <Button variant="secondary" className="w-full">
-                    {buttonText}
-                </Button>
+                <div className="py-5">
+                    <Button variant="secondary" className="w-full">
+                        {buttonText}
+                    </Button>
+                </div>
                 {/* <div className="relative mt-6 flex justify-end gap-3">
                     {cancelText && (
                         <button

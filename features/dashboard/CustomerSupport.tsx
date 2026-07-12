@@ -12,7 +12,7 @@ function CustomerSupport() {
     const [message, setMessage] = useState("");
     return (
         <div
-            className={`relative h-dvh  overflow-hidden text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
+            className={`relative h-dvh text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
             style={chatWallpaperUrl ? {
                 backgroundImage: `url(${chatWallpaperUrl})`,
                 backgroundSize: 'cover',
@@ -45,7 +45,9 @@ function CustomerSupport() {
                     </div>
                 </div>
                 {/* Chat input - always at bottom */}
-                <div
+               
+            </div>
+ <div
                     className="shrink-0 flex items-center gap-2 p-3 border-t border-[#333]"
                     style={{ backgroundColor: "var(--button-color)" }}
                 >
@@ -61,8 +63,6 @@ function CustomerSupport() {
                         <SendHorizonal />
                     </button>
                 </div>
-            </div>
-
 
         </div>
     )

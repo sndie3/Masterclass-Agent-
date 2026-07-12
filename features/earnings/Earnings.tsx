@@ -8,7 +8,9 @@ import EarningModal from "./components/EarningsModal";
 function Earnings() {
 
     const navigate = useNavigate()
-    const [showModal, setShowModal] = useState(false);
+    const [showStandard, setShowStandard] = useState(false);
+    const [showSpecialty, setShowSetSpecialty] = useState(false);
+
 
     const logs = [
         {
@@ -64,12 +66,14 @@ function Earnings() {
                 <br />
                 <div className="flex justify-evenly">
                     <DashboardCard title="Specialty" walletData={123456}>
-                        <button onClick={() => setShowModal(true)}>
+                        <button onClick={() => setShowSetSpecialty(true)}>
                             <CircleChevronLeft className='w-8 h-8' />
                         </button>
                     </DashboardCard>
                     <DashboardCard title="Standard" walletData={123456}>
-                        <CircleChevronLeft className='w-8 h-8' />
+                         <button onClick={() => setShowStandard(true)}>
+                            <CircleChevronLeft className='w-8 h-8' />
+                        </button>
                     </DashboardCard>
                 </div>
                 <p className="flex justify-center tracking-widest text-xl pt-8">LOGS</p>
@@ -78,11 +82,17 @@ function Earnings() {
                 </div>
             </div>
             <EarningModal
-                open={showModal}
+                open={showSpecialty}
                 type="Speciality"
                 wallet={1000}
-                message="Please verify your account first."
-                onCancel={() => setShowModal(false)}
+                onCancel={() => setShowSetSpecialty(false)}
+                buttonText="SUBMIT WITHDRAWAL"
+            />
+             <EarningModal
+                open={showStandard}
+                type="Standard"
+                wallet={1000}
+                onCancel={() => setShowStandard(false)}
                 buttonText="SUBMIT WITHDRAWAL"
             />
         </div>
