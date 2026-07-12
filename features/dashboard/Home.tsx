@@ -253,7 +253,7 @@ function Home() {
           type="Speciality"
           wallet={1000}
           onCancel={() => setShowDepositSpecialty(false)}
-          buttonText="SUBMIT WITHDRAWAL"
+          buttonText="SUBMIT REQUEST"
           onConfirm={() => setShowDepositSpecialty(false)}
         />
         <DepositWithdraw
@@ -261,7 +261,7 @@ function Home() {
           type="Standard"
           wallet={1000}
           onCancel={() => setShowDepositStandard(false)}
-          buttonText="SUBMIT WITHDRAWAL"
+          buttonText="SUBMIT REQUEST"
           onConfirm={() => setShowDepositStandard(false)}
         />
       </div>
