@@ -4,6 +4,8 @@ import { ChevronRight, CircleChevronLeft, Search } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import LogsTable from '../../components/common/LogsTable'
 import DashboardCard from './components/DashboardCard'
+import DepositWithdraw from '../../components/common/DepositWithdraw';
+
 function Home() {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -14,6 +16,13 @@ function Home() {
   const [username] = useState<string>(() => {
     return "Player";
   });
+
+  const [showWithdrawSpecialty, setShowWithdrawSpecialty] = useState(false);
+  const [showWithdrawStandard, setShowWithdrawStandard] = useState(false);
+  const [showDepositSpecialty, setShowDepositSpecialty] = useState(false);
+  const [showDepositStandard, setShowDepositStandard] = useState(false);
+
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -129,11 +138,15 @@ function Home() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-4 text-gray-400">
           {/* Speciality Earnings */}
           <DashboardCard title="Speciality" walletData={123456}>
-            <CircleChevronLeft className='w-8 h-8' />
+            <button onClick={() => setShowWithdrawSpecialty(true)}>
+              <CircleChevronLeft className='w-8 h-8' />
+            </button>
           </DashboardCard>
           {/* Standard Earnings */}
           <DashboardCard title="Standard" walletData={123456}>
-            <CircleChevronLeft className='w-8 h-8' />
+            <button onClick={() => setShowWithdrawStandard(true)}>
+              <CircleChevronLeft className='w-8 h-8' />
+            </button>
           </DashboardCard>
           {/* Online Players count */}
           <DashboardCard title="Online" walletData={1203} />
@@ -144,11 +157,15 @@ function Home() {
         <div className="grid grid-cols-2 gap-4 text-gray-400">
           {/* Speciality Wallet */}
           <DashboardCard title="Speciality" walletData={123456}>
-            <CircleChevronLeft className='w-8 h-8' />
+            <button onClick={() => setShowDepositSpecialty(true)}>
+              <CircleChevronLeft className='w-8 h-8' />
+            </button>
           </DashboardCard>
           {/* Standard Wallet */}
           <DashboardCard title="Standard" walletData={123456}>
-            <CircleChevronLeft className='w-8 h-8' />
+            <button onClick={() => setShowDepositStandard(true)}>
+              <CircleChevronLeft className='w-8 h-8' />
+            </button>
           </DashboardCard>
         </div>
         <div className='flex justify-center py-4'>
@@ -215,6 +232,38 @@ function Home() {
             </button>
           ))}
         </div>
+        <DepositWithdraw
+          open={showWithdrawSpecialty}
+          type="Speciality"
+          wallet={1000}
+          onCancel={() => setShowWithdrawSpecialty(false)}
+          buttonText="SUBMIT WITHDRAWAL"
+          onConfirm={() => setShowWithdrawSpecialty(false)}
+        />
+        <DepositWithdraw
+          open={showWithdrawStandard}
+          type="Standard"
+          wallet={1000}
+          onCancel={() => setShowWithdrawStandard(false)}
+          buttonText="SUBMIT WITHDRAWAL"
+          onConfirm={() => setShowWithdrawStandard(false)}
+        />
+        <DepositWithdraw
+          open={showDepositSpecialty}
+          type="Speciality"
+          wallet={1000}
+          onCancel={() => setShowDepositSpecialty(false)}
+          buttonText="SUBMIT WITHDRAWAL"
+          onConfirm={() => setShowDepositSpecialty(false)}
+        />
+        <DepositWithdraw
+          open={showDepositStandard}
+          type="Standard"
+          wallet={1000}
+          onCancel={() => setShowDepositStandard(false)}
+          buttonText="SUBMIT WITHDRAWAL"
+          onConfirm={() => setShowDepositStandard(false)}
+        />
       </div>
     </div>
   )

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import CustomInput from "../../../components/ui/InputBox";
-import Button from "../../../components/ui/Button";
+import CustomInput from "../ui/InputBox";
+import Button from "../ui/Button";
 
-interface EarningModalProps {
+interface DepositWithdrawProps {
     open: boolean;
     type?: "Speciality" | "Standard";
     confirmText?: string;
@@ -13,14 +13,14 @@ interface EarningModalProps {
     buttonText: string
 }
 
-export default function EarningModal({
+export default function DepositWithdraw({
     open,
     type,
     wallet,
     buttonText,
     onCancel,
     onConfirm
-}: EarningModalProps) {
+}: DepositWithdrawProps) {
     const [animate, setAnimate] = useState(false);
 
     useEffect(() => {
@@ -58,7 +58,7 @@ export default function EarningModal({
                     <p className="mt-3 text-center text-lg text-gray-300">
                         {type}
                     </p>
-                    <p className="my-3 text-center text-2xl text-gray-300">
+                    <p className="my-3 text-center text-2xl text-gray-300 font-bold">
                         {(wallet).toLocaleString()}
                     </p>
                 </div>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import LogsTable from "../../components/common/LogsTable";
 import DashboardCard from "../dashboard/components/DashboardCard";
 import { useState } from "react";
-import EarningModal from "./components/EarningsModal";
+import DepositWithdraw from "../../components/common/DepositWithdraw";
 
 function Earnings() {
 
@@ -81,7 +81,7 @@ function Earnings() {
                     <LogsTable logs={logs} />
                 </div>
             </div>
-            <EarningModal
+            <DepositWithdraw
                 open={showSpecialty}
                 type="Speciality"
                 wallet={1000}
@@ -89,14 +89,13 @@ function Earnings() {
                 buttonText="SUBMIT WITHDRAWAL"
                 onConfirm={() => setShowSetSpecialty(false)}
             />
-            <EarningModal
+            <DepositWithdraw
                 open={showStandard}
                 type="Standard"
                 wallet={1000}
                 onCancel={() => setShowStandard(false)}
                 buttonText="SUBMIT WITHDRAWAL"
                 onConfirm={() => setShowStandard(false)}
-
             />
         </div>
     )
