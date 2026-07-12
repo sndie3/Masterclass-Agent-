@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "compress:themes": "tsx utils/compressThemeImages.ts",
     "compress:chat-wallpapers": "tsx utils/compressChatWallpapers.ts",
+    "compress:app-icons": "tsx utils/compressAppIcons.ts",
     "compress:pwa-icons": "tsx utils/compressPwaIcons.ts"
   },
   "dependencies": {

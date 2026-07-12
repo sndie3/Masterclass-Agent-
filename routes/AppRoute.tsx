@@ -14,6 +14,8 @@ import Register from "../features/register/Register"
 import Settings from "../features/settings/Settings"
 import ChatSettings from "../features/settings/ChatSettings"
 import ChatWallpaper from "../features/settings/ChatWallpaper"
+import ChangeChatName from "../features/settings/ChangeChatName"
+import AppIcon from "../features/settings/AppIcon"
 import ProfileSecurity from "../features/settings/ProfileSecurity"
 import DeactivateAccount from "../features/settings/DeactivateAccount"
 import ShareReferral from "../features/profile/ShareRefferal"
@@ -44,6 +46,8 @@ export default function AppRoutes() {
         <Route path="profile-security" element={<ProfileSecurity />}/>
         <Route path="chat-settings" element={<ChatSettings />}/>
         <Route path="chat-wallpaper" element={<ChatWallpaper />}/>
+        <Route path="change-chat-name" element={<ChangeChatName />}/>
+        <Route path="app-icon" element={<AppIcon />}/>
         <Route path="deactivate-account" element={<DeactivateAccount />}/>
         <Route path="change-password" element={<Change />}/>
         <Route path="link-player-account" element={<LinkPlayer />}/>

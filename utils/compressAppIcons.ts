@@ -6,7 +6,7 @@ import { compressImageFile, formatSize, listImageFiles } from './compressImage.t
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SOURCE_DIR = 'C:\\Users\\Owner\\Downloads\\app icons';
+const SOURCE_DIR = path.join(__dirname, '..', 'public', 'assets', 'masterclass logo icon');
 const DEST_DIR = path.join(__dirname, '..', 'public', 'assets', 'app-icons');
 const SIZE = 192;
 const QUALITY = 90;

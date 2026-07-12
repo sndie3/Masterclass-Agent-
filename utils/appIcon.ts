@@ -1,4 +1,4 @@
-const DEFAULT_ICON = '/favicon.svg';
+const DEFAULT_ICON = '/masterclass-orig.png';
 
 export function applyAppIcon(iconPath: string | null): void {
   let link = document.querySelector<HTMLLinkElement>("link[rel*='icon']");
