@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import Footer from "../../components/common/Footer";
+import Button from "../../components/ui/Button";
 
 const settingsOptions = [
   { label: "PROFILE SECURITY", route: "/profile-security" },
@@ -24,7 +25,7 @@ export default function Settings() {
         <div className="flex items-center mb-6">
           <button
             onClick={() => navigate(-1)}
-            className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
+            className="h-10 w-10 rounded-full flex items-center justify-center shrink-0 cursor-pointer"
             style={{ backgroundColor: "var(--button-color)" }}
           >
             <ChevronLeft size={24} />
@@ -35,16 +36,23 @@ export default function Settings() {
         {/* Settings Options */}
         <div className="flex flex-col gap-3">
           {settingsOptions.map((option) => (
-            <button
-              key={option.label}
+            <Button 
+              key={option.label}           
               onClick={() => handleNavigate(option.route)}
-              className="w-full py-4 text-center font-semibold text-white transition hover:opacity-90"
-              style={{ backgroundColor: "var(--card-color)" }}
-            >
+              variant="secondary"
+              className="w-full">
               {option.label}
-            </button>
+            </Button>
           ))}
         </div>
+        {/* <button
+          key={option.label}
+          onClick={() => handleNavigate(option.route)}
+          className="w-full py-4 text-center font-semibold text-white transition hover:opacity-90"
+          style={{ backgroundColor: "var(--card-color)" }}
+        >
+          {option.label}
+        </button> */}
       </div>
 
       <div className="px-5 pb-4">

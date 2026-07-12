@@ -29,8 +29,7 @@ const Toggle = ({ checked, onChange }: { checked: boolean; onChange: () => void 
 function ToggleRow({ title, enabled, onToggle }: ToggleProps) {
   return (
     <div
-      className="flex items-center justify-between px-4 py-4"
-      style={{ backgroundColor: "var(--card-color)" }}
+      className="flex items-center justify-between px-4 py-4 bg-[#1d1d1d]  text-white"
     >
       <span className="text-sm font-medium text-white">{title}</span>
       <Toggle checked={enabled} onChange={onToggle} />
