@@ -30,7 +30,7 @@ export default function AppIcon() {
     setSelectedIcon(DEFAULT_ICON);
     localStorage.setItem(STORAGE_KEY, DEFAULT_ICON);
     applyAppIcon(DEFAULT_ICON);
-    navigate(-1);
+    setMessage("Default app icon restored.");
   };
 
   return (
