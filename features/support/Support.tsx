@@ -58,7 +58,7 @@ function Support() {
                 transition-transform duration-700 ease-in-out
                 z-20
                 ${showGame ? "translate-y-full" : "translate-y-0"}
-                ${chatWallpaperUrl ? "bg-black/60" : "bg-black"}
+                ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}
             `}
                 style={chatWallpaperUrl ? {
                     backgroundImage: `url(${chatWallpaperUrl})`,
@@ -125,8 +125,7 @@ function Support() {
                     )}
 
                     {activeTab === "players" && (
-                        <div className="flex flex-col h-full "
-                            style={{ backgroundColor: "var(--button-color)" }}>
+                        <div className="flex flex-col h-full bg-black/20 backdrop-blur-sm">
                             {/* Support list */}
                             <div className="space-y-2 flex-1 overflow-y-auto">
                                 <div

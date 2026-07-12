@@ -1,14 +1,26 @@
 import { ChevronLeft, SendHorizonal } from "lucide-react"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { useChatWallpaper } from "../../hooks/useChatWallpaper";
+import { chatWallpaperImages } from "../../utils/chatWallpaper";
 
 function CustomerSupport() {
 
     const navigate = useNavigate()
+    const { chatWallpaper } = useChatWallpaper();
+    const chatWallpaperUrl = chatWallpaperImages[chatWallpaper];
     const [message, setMessage] = useState("");
     return (
-        <div className="relative min-h-screen overflow-hidden text-white flex flex-col ">
-            <div className="flex items-center mb-4 px-5 pt-4 pb-6">
+        <div
+            className={`relative min-h-screen overflow-hidden text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
+            style={chatWallpaperUrl ? {
+                backgroundImage: `url(${chatWallpaperUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+            } : undefined}
+        >
+            <div className="flex items-center mb-4 px-5 pt-4 pb-6 relative z-10">
                 <button
                     onClick={() => navigate('/dashboard')}
                     className="h-10 w-10 rounded-full flex items-center justify-center shrink-0"
