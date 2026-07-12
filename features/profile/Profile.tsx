@@ -5,7 +5,7 @@ export default function Profile() {
   const navigate = useNavigate();
 
   const menuItems = [
-    { label: "Link player account" , link : ""},
+    { label: "Link player account" , link : "/link-player-account"},
     { label: "Selfie with ID" , link : ""},
     { label: "Share Referral Code", link : "/profile/share-referral" },
   ];

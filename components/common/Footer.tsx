@@ -4,7 +4,7 @@ function Footer() {
     <div className="flex items-center py-5 px-2">
       <div className="font-bold text-md text-white">
         MASTERCLASS
-        <span className="text-gray-500 ml-2 text-xs"> 2026 v1.0</span>
+        <span className="text-gray-500 ml-2 text-xs"> 2026 v.1.0</span>
       </div>
     </div>
   );
