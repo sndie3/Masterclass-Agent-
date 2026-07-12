@@ -8,8 +8,7 @@ const STORAGE_KEY = "selfieWithID";
 export default function SelfieWithID() {
   const navigate = useNavigate();
 
-  const [photo, setPhoto] = useState<string | null>(null);
-  const [showCamera, setShowCamera] = useState(false);
+  const [showCamera, setShowCamera] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [cameraError, setCameraError] = useState(false);
   const [message, setMessage] = useState("");
@@ -17,11 +16,19 @@ export default function SelfieWithID() {
   const streamRef = useRef<MediaStream | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const hasAutoOpenedCamera = useRef(false);
 
   useEffect(() => {
     startCamera();
     return () => stopCamera();
   }, []);
+
+  useEffect(() => {
+    if (cameraError && !hasAutoOpenedCamera.current && fileInputRef.current) {
+      hasAutoOpenedCamera.current = true;
+      fileInputRef.current.click();
+    }
+  }, [cameraError]);
 
   const startCamera = async () => {
     setIsLoading(true);
@@ -30,6 +37,7 @@ export default function SelfieWithID() {
 
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       setCameraError(true);
+      setShowCamera(false);
       setIsLoading(false);
       return;
     }
@@ -52,6 +60,7 @@ export default function SelfieWithID() {
       setShowCamera(true);
     } catch {
       setCameraError(true);
+      setShowCamera(false);
       setMessage("Camera access failed. You can use your phone's camera below.");
     } finally {
       setIsLoading(false);
@@ -81,9 +90,10 @@ export default function SelfieWithID() {
   };
 
   const handleRetryCamera = () => {
-    setPhoto(null);
+    stopCamera();
     setCameraError(false);
     setMessage("");
+    setShowCamera(true);
     startCamera();
   };
 
@@ -126,13 +136,7 @@ export default function SelfieWithID() {
 
         {/* Camera / Preview */}
         <div className="flex-1 flex flex-col items-center justify-center">
-          {isLoading && (
-            <div className="w-full max-w-sm aspect-[3/4] bg-black border border-white/20 flex items-center justify-center">
-              <p className="text-sm text-gray-400 animate-pulse">Accessing camera...</p>
-            </div>
-          )}
-
-          {!isLoading && showCamera && (
+          {showCamera && (
             <div className="w-full max-w-sm aspect-[3/4] bg-black border border-white/20 overflow-hidden relative">
               <video
                 ref={videoRef}
@@ -142,20 +146,15 @@ export default function SelfieWithID() {
                 className="w-full h-full object-cover"
               />
               <canvas ref={canvasRef} className="hidden" />
+              {isLoading && (
+                <div className="absolute inset-0 bg-black flex items-center justify-center z-10">
+                  <p className="text-sm text-gray-400 animate-pulse">Accessing camera...</p>
+                </div>
+              )}
             </div>
           )}
 
-          {!isLoading && !showCamera && photo && (
-            <div className="w-full max-w-sm aspect-[3/4] border border-white/20 overflow-hidden">
-              <img
-                src={photo}
-                alt="Captured selfie with ID"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
-
-          {!isLoading && !showCamera && !photo && (
+          {!showCamera && (
             <div className="w-full max-w-sm aspect-[3/4] bg-black border border-white/20 flex items-center justify-center px-4">
               <p className="text-sm text-gray-400 text-center">
                 {cameraError
