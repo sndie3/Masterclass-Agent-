@@ -39,7 +39,7 @@ export default function Settings() {
             <Button 
               key={option.label}           
               onClick={() => handleNavigate(option.route)}
-              variant="secondary"
+              variant="opacitysecondary"
               className="w-full">
               {option.label}
             </Button>

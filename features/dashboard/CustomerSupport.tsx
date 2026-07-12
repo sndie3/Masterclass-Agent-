@@ -12,7 +12,7 @@ function CustomerSupport() {
     const [message, setMessage] = useState("");
     return (
         <div
-            className={`relative min-h-screen overflow-hidden text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
+            className={`relative h-dvh  overflow-hidden text-white flex flex-col ${chatWallpaperUrl ? "bg-black/30" : "bg-black"}`}
             style={chatWallpaperUrl ? {
                 backgroundImage: `url(${chatWallpaperUrl})`,
                 backgroundSize: 'cover',
@@ -30,7 +30,7 @@ function CustomerSupport() {
                 </button>
                 <h1 className="text-xl font-bold flex-1 text-center pr-10">Customer Support</h1>
             </div>
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col flex-1 overflow-hidden">
                 {/* Chat list */}
                 <div className="flex-1 overflow-y-auto p-4 font-bahnschrift">
                     <div className="flex justify-start">
@@ -46,7 +46,7 @@ function CustomerSupport() {
                 </div>
                 {/* Chat input - always at bottom */}
                 <div
-                    className="mt-auto flex items-center gap-2 p-3 border-t border-[#333]"
+                    className="shrink-0 flex items-center gap-2 p-3 border-t border-[#333]"
                     style={{ backgroundColor: "var(--button-color)" }}
                 >
                     <input

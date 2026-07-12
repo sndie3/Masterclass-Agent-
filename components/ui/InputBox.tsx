@@ -11,6 +11,8 @@ interface InputInterface {
     "custom-style"?: string,
     style?: any
     numbersOnly?: boolean;
+    decimal?: boolean;
+
 
 }
 /**
@@ -40,11 +42,20 @@ const CustomInput: React.FC<InputInterface> = ({
     style,
     pattern,
     numbersOnly = false,
+    decimal,
     "custom-style": customStyle,
 }) => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (numbersOnly) {
-            e.target.value = e.target.value.replace(/\D/g, "");
+            if (decimal) {
+                // Allow digits and one decimal point
+                e.target.value = e.target.value
+                    .replace(/[^0-9.]/g, "")
+                    .replace(/(\..*)\./g, "$1");
+            } else {
+                // Integers only
+                e.target.value = e.target.value.replace(/\D/g, "");
+            }
         }
 
         onChange?.(e);
@@ -53,7 +64,7 @@ const CustomInput: React.FC<InputInterface> = ({
         <>
             <input
                 type={type}
-                inputMode={numbersOnly ? "numeric" : inputMode}
+                inputMode={decimal ? "decimal" : numbersOnly ? "numeric" : inputMode}
                 maxLength={maxLength}
                 placeholder={placeholder}
                 value={value}

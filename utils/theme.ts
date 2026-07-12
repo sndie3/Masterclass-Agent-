@@ -1,7 +1,7 @@
 export type Theme =
   | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '10'
   | '11' | '12' | '13' | '14' | '15' | '16' | '17' | '18' | '19' | '20'
-  | '21' | '22' | '23' | '24';
+  | '21' | '22' | '23' | '24' | '25';
 
 export const themeImages: Record<Theme, string> = {
   '1': '',
@@ -28,6 +28,7 @@ export const themeImages: Record<Theme, string> = {
   '22': '/assets/masterclass theme/21.jpg',
   '23': '/assets/masterclass theme/22.jpg',
   '24': '/assets/masterclass theme/23.jpg',
+  '25': '/assets/masterclass theme/24.jpg',
 };
 
 export function applyTheme(theme: Theme) {

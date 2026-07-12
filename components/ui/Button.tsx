@@ -3,7 +3,8 @@ import type { ReactNode, ButtonHTMLAttributes } from "react";
 type ButtonVariant =
   | "primary"
   | "secondary"
-;
+  | "opacitysecondary"
+  ;
 
 type ButtonSize = "sm" | "md" | "lg";
 
@@ -13,12 +14,13 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children: ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  widthSize?:widthProps
+  widthSize?: widthProps
 };
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: "bg-red-800 hover:bg-red-700 text-white",
   secondary: "bg-[#1d1d1d] hover:bg-[#252525] text-white",
+  opacitysecondary: "bg-[#1d1d1d]/50 hover:bg-[#252525]/80 text-white",
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -27,17 +29,17 @@ const sizeClasses: Record<ButtonSize, string> = {
   lg: "px-6 py-4 text-lg",
 };
 
-const widthClasses: Record<widthProps,string> = {
-  sm:'w-[120px]',
-  md:'w-[220px]',
-  lg:'w-[330px]'
+const widthClasses: Record<widthProps, string> = {
+  sm: 'w-[120px]',
+  md: 'w-[220px]',
+  lg: 'w-[330px]'
 }
 
 export default function Button({
   children,
   variant = "primary",
   size = "md",
-  widthSize= "sm",
+  widthSize = "sm",
   className,
   disabled = false,
   ...props
@@ -51,7 +53,7 @@ export default function Button({
         uppercase
         transition
         duration-200
-        py-4
+        py-3
         ${widthClasses[widthSize]}
         ${variantClasses[variant]}
         ${sizeClasses[size]}

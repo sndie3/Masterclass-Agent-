@@ -2,10 +2,14 @@ import { ChevronLeft, CircleChevronLeft } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import LogsTable from "../../components/common/LogsTable";
 import DashboardCard from "../dashboard/components/DashboardCard";
+import { useState } from "react";
+import EarningModal from "./components/EarningsModal";
 
 function Earnings() {
 
     const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false);
+
     const logs = [
         {
             uid: "PID-ROGER-000053-2026",
@@ -58,10 +62,11 @@ function Earnings() {
                 <br />
                 <p className="text-gray-400 text-sm">PLAY RESPONSIBLY.</p>
                 <br />
-
                 <div className="flex justify-evenly">
                     <DashboardCard title="Specialty" walletData={123456}>
-                        <CircleChevronLeft className='w-8 h-8' />
+                        <button onClick={() => setShowModal(true)}>
+                            <CircleChevronLeft className='w-8 h-8' />
+                        </button>
                     </DashboardCard>
                     <DashboardCard title="Standard" walletData={123456}>
                         <CircleChevronLeft className='w-8 h-8' />
@@ -72,8 +77,14 @@ function Earnings() {
                     <LogsTable logs={logs} />
                 </div>
             </div>
-
-
+            <EarningModal
+                open={showModal}
+                type="Speciality"
+                wallet={1000}
+                message="Please verify your account first."
+                onCancel={() => setShowModal(false)}
+                buttonText="SUBMIT WITHDRAWAL"
+            />
         </div>
     )
 }
